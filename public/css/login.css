@@ -1,0 +1,17 @@
+.box{
+    width: 1600px;
+    height: 60%;
+}
+.input{
+    width: 60%;
+    height: 30px;
+}
+.input_box{
+    margin-top: 20px;
+}
+.main{
+    margin-left: 20%;
+}
+.input_label{
+    display: block;
+}
