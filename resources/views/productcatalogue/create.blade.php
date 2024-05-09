@@ -2,7 +2,8 @@
 @section('script')
     <link rel="stylesheet" href="{{ asset('css/sign.css') }}">
     <script src="{{ asset('js/goback.js') }}"></script>
-    @endsection
+    <script src="{{ asset('js/parent.js') }}"></script>
+@endsection
 @section('productcatalogue.main')
     <div class="main">
         <h4>Thêm mới nhóm sản phẩm</h4>
@@ -32,6 +33,7 @@
                 <div class="input_box">
                     <div class="input_label">
                         <label for="parent_id"><h6>Tùy chọn nhóm cha : </h6></label>
+                        <span id="catalogue_des" class="text-danger"></span>
                     </div>
                     <select name="parent_id" id="parent_id">
                         <option value="">-- Tùy chọn nhóm cha --</option>

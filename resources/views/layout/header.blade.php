@@ -31,7 +31,26 @@
           <button type="button" class="btn"><a href="{{ route('user.login') }}" class="nav-item text-dark" style="text-decoration-line: none">Đăng nhập</a></button>
           <button type="button" class="btn" style="margin-left:10px"><a href="{{ route('user.signin') }}" class="nav-item text-dark" style="text-decoration-line: none">Đăng ký</a></button>
           @else
+          @php
+          $totalQuantity = 0;
+          @endphp
+
+          @if (session('cart'))
+              @foreach (session('cart') as $item)
+                  @php
+                      $totalQuantity += $item['quantity'];
+                  @endphp
+              @endforeach
+          @endif
+
+          <div style="height:20px;margin-top:10px;margin-right:5px ">
+            <a class="btn btn-outline-danger" href="{{ route('store.cart') }}">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge text-bg-danger" id="cart-quantity">{{ $totalQuantity }}</span>
+           </a>
+          </div>
+
           <p class="mt-3">Xin chào, {{ Auth::user()->name }}</p>
+
           <button type="button" class="btn"><a href="{{ route('user.logout') }}" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></button>              
           @endguest         
         </form>

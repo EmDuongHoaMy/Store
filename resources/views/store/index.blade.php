@@ -21,24 +21,35 @@
         </ul>
     </nav>
 </div>
+
+{{-- Danh sách nhóm sản phẩm --}}
+<ul class="nav justify-content-center">
+    @foreach ($product_catalogue as $item)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('store.index_by_catalogue',$item->id) }}">{{ $item->name }}</a>
+        </li>
+    @endforeach
+</ul>
+
 {{-- Danh sách sản phẩm --}}
 <div class="row -mt-5" style="margin-top:20px;padding-left:20px">
-    @foreach ($product as $item)
+    @foreach ($product as $id =>$item)
+
     <div class="card text-lg-center box">
-        <a href="{{ route('store.review',$item->id) }}">
-            <img src="{{ $item->images}}" class="card-img-top" alt="...">
+        <a href="{{ route('store.review',$item['id']) }}">
+            @php
+                $imageURL = $item['images'];
+            @endphp
+            <img src="{{ isset($item['images']) ? asset("$imageURL") : 'N/A'}}" class="card-img-top" alt="...">
             <div class="card-body" >
-                <p class="text-dark text-color">{{ $item->name }}</p>
-                @php
-                    $formated_number = number_format($item->price,0,',',',');
-                @endphp
-                <h5>{{ $formated_number }} VND</h5>
+                <p class="text-dark text-color">{{ $item['name'] }}</p>
+                <h5>{{ number_format($item['price'],0,',',',') }} VND</h5>
             </div>
         </a>
     </div>
     @endforeach
 </div> 
-<div style="margin-left:40%;margin-top:20px  " class="text-danger">
+{{-- <div style="margin-left:40%;margin-top:20px  " class="text-danger">
     {{ $product->links('pagination::bootstrap-4') }}
-</div>
+</div> --}}
 @endsection

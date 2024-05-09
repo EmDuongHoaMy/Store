@@ -2,3 +2,10 @@
     margin: 20px;
     width: 20rem;
 }
+.home{
+    width: 1050px;
+    height: 600px;
+}
+.card_text{
+    text-decoration: none;
+}

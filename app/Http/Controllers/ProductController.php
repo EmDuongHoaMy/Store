@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductCatalogue;
 use App\Services\Interfaces\ProductServiceInterface as ProductService;
 use App\Services\Interfaces\ProductCatalogueServiceInterface as ProductCatalogueService;
 // use Illuminate\Support\Facades\Auth;
@@ -55,6 +56,5 @@ class ProductController extends Controller
     public function destroy($id){
         $this->productService->destroy($id);
         return redirect(route('product.index'))->with('success','Xoá thông tin thành công');
-
     }
 }

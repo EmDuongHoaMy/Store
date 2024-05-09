@@ -8,7 +8,7 @@
     <div class="main">
         <h4>Thêm mới sản phẩm</h4>
         <div class="box">
-            <form action="{{ route('product.create') }}" method="post">
+            <form action="{{ route('product.create') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="input_box">
                     <div class="input_label">
@@ -41,6 +41,16 @@
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
                     </select>
+                </div>
+
+                <div class="input_box">
+                    <div class="input_label">
+                        <label for="image"><h6>Nhập hình ảnh sản phẩm : </h6></label>
+                        @if ($errors->has('image'))
+                            <span class="text-danger">{{ $errors->first('image') }}</span>
+                        @endif
+                    </div>
+                    <input type="file" name="image" id="image" accept="image/*">
                 </div>
 
                 <div class="input_box">

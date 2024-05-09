@@ -32,7 +32,7 @@
 
                 <div class="input_box">
                     <button type="button" onclick="goback()" class="btn btn-primary">Trở lại</button>
-                    <button type="submit" class="btn btn-danger">Xóa nhóm thành viên</button>
+                    <button type="submit" class="btn btn-danger">Xóa sản phẩm</button>
                 </div>
             </form>
         </div>

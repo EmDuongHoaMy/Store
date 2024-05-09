@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserCatalogueController;
@@ -10,7 +11,7 @@ use App\Http\Middleware\AuthMiddleware;
 use App\Http\Controllers\ProductController;
 
 
-Route::get('/', function () {return view('home');})->name('home');
+Route::get('/',[HomeController::class,'home'])->name('home');
 Route::get('/ajax/location/district/',[LocationController::class,'getDistrict']);
 Route::get('/ajax/location/ward/',[LocationController::class,'getWard']);
 Route::get('/ajax/getdoc/',[ProductCatalogueController::class,'getDescription']);
@@ -62,6 +63,10 @@ Route::prefix('/products_catalogue')->group(function(){
 Route::prefix('/store')->group(function(){
     Route::get('/index',[StoreController::class,'index'])->middleware(AuthMiddleware::class)->name('store.index');    
     Route::get('/review/{id}',[StoreController::class,'review'])->middleware(AuthMiddleware::class)->name('store.review');
-    Route::get('/pay/{id}',[StoreController::class,'pay'])->middleware(AuthMiddleware::class)->name('store.pay');
-
+    Route::get('/pay',[StoreController::class,'pay'])->middleware(AuthMiddleware::class)->name('store.pay');
+    Route::get('/cart',[StoreController::class,'cart'])->middleware(AuthMiddleware::class)->name('store.cart');
+    Route::get('/add_to_cart',[StoreController::class,'addToCart'])->middleware(AuthMiddleware::class)->name('store.addtocart');
+    Route::get('/delete_item/{id}',[StoreController::class,'deleteItem'])->middleware(AuthMiddleware::class)->name('store.deleteitem');
+    Route::get('/index_by_catalogue/{id}',[StoreController::class,'index_by_catalogue'])->middleware(AuthMiddleware::class)->name('store.index_by_catalogue');    
+    Route::post('/order',[StoreController::class,'order'])->middleware(AuthMiddleware::class)->name('store.order');
 });

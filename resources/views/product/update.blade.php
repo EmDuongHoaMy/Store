@@ -7,7 +7,7 @@
     <div class="main">
         <h4>Thay đổi thông tin sản phẩm</h4>
         <div class="box">
-            <form action="{{ route('product.update',$product->id) }}" method="post">
+            <form action="{{ route('product.update',$product->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="input_box">
                     <div class="input_label">
@@ -27,6 +27,16 @@
                         @endif
                     </div>
                     <input type="text" name="description" id="description" placeholder="Nhập mô tả sản phẩm" value="{{ $product->description }}" class="input">
+                </div>
+
+                <div class="input_box">
+                    <div class="input_label">
+                        <label for="image"><h6>Nhập hình ảnh sản phẩm : </h6></label>
+                        @if ($errors->has('image'))
+                            <span class="text-danger">{{ $errors->first('image') }}</span>
+                        @endif
+                    </div>
+                    <input type="file" name="image" id="image" accept="image/*">
                 </div>
 
                 <div class="input_box">

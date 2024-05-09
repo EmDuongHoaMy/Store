@@ -6,14 +6,14 @@
 @section('store.main')
 {{-- CSS --}}
 {{-- Note:lưu ý --}}
-<div class="note bg-danger text-center">
-    <p style="font-size:20px;">Miễn phí ship cho đơn hàng có 2 sản phẩm trở lên</p>
+<div class="note bg-secondary text-center">
+    <p style="font-size:20px;">Miễn phí ship khi giá trị đơn hàng từ 500,000 trở lên</p>
 </div>
 {{-- khu vực 1 --}}
 <div class="box_1 d-flex">
     {{-- khu vực 1.1 : hiển thị ảnh sản phẩm --}}
     <div class="box1_1">
-        <img src="{{ $product->images }}" alt="" style="width:100%;height:100%;">
+        <img src="{{ asset("$product->images") }}" alt="" style="width:100%;height:100%;">
     </div>
 
     {{-- khu vực 1.2 : hiển thị form mua hàng --}}
@@ -21,7 +21,7 @@
         {{-- khu vực 1.2.1 : hiển thị thông tin sản phẩm --}}
         <div class="box_1_2_1">
             <input type="text" name="product_id" id="product_id" value="{{ $product->id }}" hidden>
-            <p style="font-size:40px">{{ $product->name }}</p>
+            <p style="font-size:25px">{{ $product->name }}</p>
             @php
                 $formattedValue = number_format($product->price,0,',', ',');
             @endphp
@@ -55,9 +55,9 @@
                 </div >
 
                 <div class="mt-3 d-flex" style="width:100%;height:50px;">
-                <button type="submit" class="btn-danger block full-width m-b center-block" style="width:50%;height:100%;">
+                {{-- <button type="submit" class="btn-danger block full-width m-b center-block" style="width:50%;height:100%;">
                     <i class="fab fa-buysellads"></i> Mua hàng
-                </button>
+                </button> --}}
 
                 <button type="button" onclick="addCart()" class="btn-primary block full-width m-b center-block" style="width:50%;height:100%;">
                     <i class="fas fa-store"></i> Thêm vào giỏ hàng
@@ -67,9 +67,9 @@
         </div>
         {{-- khu vực 1.2.2 : hiển thị thông tin cửa hàng --}}
         <div class="box_1_2_2 text-exception">
-            <div>
+            {{-- <div>
                 <p><i class="fa fa-address-card"></i> Cửa hàng WD</p>
-            </div>
+            </div> --}}
             <div style="padding-top:10px">
                 <p> <i class="fa fa-archive"></i>  Nhận đặt hàng theo yêu cầu với số lượng lớn</p>
             </div>
@@ -101,7 +101,7 @@
         @foreach ($other as $item)
         <div class="card text-lg-center box">
             <a href="{{ route('store.review',$item->id) }}">
-                <img src="{{ $item->images}}" class="card-img-top" alt="...">
+                <img src="{{ asset("$item->images")}}" class="card-img-top" alt="...">
                 <div class="card-body" >
                     <p class="text-dark text-color">{{ $item->name }}</p>
                     @php

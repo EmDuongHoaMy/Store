@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    $('#products_catalogue_id').change(function() {
+    $('#parent_id').change(function() {
         var productCatalogueId = $(this).val();
         $.ajax({
             url: '/ajax/getdoc/',

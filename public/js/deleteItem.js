@@ -1,26 +1,20 @@
-function addCart(){
-    var qtt = $('#quantity').val();
-    var sz = $('#size').val();
+function deleteItem(){
     var id = $('#product_id').val();
-    var cartItemId = $(this).data("cart-item-id");
     var _token = $('meta[name="csrf-token"]').attr('content');
 
     let option = {
         // _token: '{{ csrf_token() }}',
         'id' : id,
-        'size' : sz,
-        'quantity':qtt,
-        'cart_item_id': cartItemId
     }
     $.ajax({
-        url: "/store/add_to_cart",
+        url: "/store/delete_item",
         type: 'GET',
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         data: jQuery.param(option) ,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         success: function(res) {
-            alert('Cart Updated');
             $('#cart-quantity').text(response.cartCount);
+            alert('Cart Updated');
             console.table(res);
         },
         error: function(xhr, status, error) {

@@ -52,6 +52,5 @@
             </tr>
             @endforeach
         </table>
-        {{ $product->links('pagination::bootstrap-4') }}
     </div>
 @endsection

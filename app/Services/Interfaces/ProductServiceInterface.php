@@ -17,4 +17,8 @@ interface ProductServiceInterface
     public function destroy(int $id);
     public function get(int $id);
     public function storevalidate(Request $request);
+    public function addtocart(Request $request);
+    public function delete_item(string $id);
+    public function paginateByCatalogue(int $id);
+    public function getImageUrl(Request $request);
 }
