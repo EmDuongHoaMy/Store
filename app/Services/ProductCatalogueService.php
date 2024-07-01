@@ -8,6 +8,7 @@ use App\Models\ProductCatalogue;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 /**
@@ -40,24 +41,46 @@ class ProductCatalogueService implements ProductCatalogueServiceInterface
     }
 
     public function create(Request $request){
-        ProductCatalogue::create([
-            'name'=>$request->input('name'),
-            'description'=>$request->input('description'),
-            'parent_id'=>$request->input('parent_id'),
-            'user_id'  =>Auth::id()
-        ]);
+        // ProductCatalogue::create([
+        //     'name'=>$request->input('name'),
+        //     'description'=>$request->input('description'),
+        //     'parent_id'=>$request->input('parent_id'),
+        //     'user_id'  =>Auth::id()
+        // ]);
+        DB::beginTransaction();
+
+        try {
+            ProductCatalogue::create([
+                'name'=>$request->input('name'),
+                'description'=>$request->input('description'),
+                'parent_id'=>$request->input('parent_id'),
+                'user_id'  =>Auth::id()
+            ]);
+            ProductCatalogue::fixTree();
+            DB::commit();
+        } catch (\Exception $e) {
+            // Nếu có lỗi xảy ra, rollback transaction
+            DB::rollback();
+        }
+
     }
 
     public function update(int $id,Request $request){
+        $nodes = ProductCatalogue::find($id);
+        $parent = ProductCatalogue::find($request->input('parent_id'));
         ProductCatalogue::where('id',$id)->update([
             'name'=>$request->input('name'),
             'description'=>$request->input('description'),
             'parent_id'=>$request->input('parent_id')
         ]);
+        ProductCatalogue::fixTree();
+
     }
 
     public function destroy(int $id){
         ProductCatalogue::find($id)->delete();
+        ProductCatalogue::fixTree();
+
     }
 
     public function get($id){
@@ -66,6 +89,12 @@ class ProductCatalogueService implements ProductCatalogueServiceInterface
 
     public function getAll(){
         return ProductCatalogue::all();
+    }
+
+    public function getAncestors($id){
+        $productCatalogue = ProductCatalogue::find($id);
+        $group = $productCatalogue->ancestors()->get();
+        return $group;
     }
     
 }

@@ -27,7 +27,7 @@
                             <span class="text-danger">{{ $errors->first('description') }}</span>
                         @endif
                     </div>
-                    <input type="text" name="description" id="description" placeholder="Nhập mô tả nhóm sản phẩm" class="input">
+                    <textarea name="description" id="description" placeholder="Nhập mô tả nhóm sản phẩm" class="input"></textarea>
                 </div>
 
                 <div class="input_box">
@@ -40,6 +40,7 @@
                         @foreach ($productcatalogue as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach
+
                     </select>
                 </div>
 
@@ -50,4 +51,7 @@
             </form>
         </div>
     </div>
+@endsection
+@section('script-2')
+<script src="{{ asset('js/description_ckeditor.js') }}"></script>
 @endsection

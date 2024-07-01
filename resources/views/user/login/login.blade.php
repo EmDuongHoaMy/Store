@@ -26,6 +26,7 @@
                         @if ($errors->has('password'))
                             <span class="text-danger">{{ $errors->first('password') }}</span>
                         @endif
+                      
                     </div>
                     <input type="password" name="password" id="password" placeholder="Nhập password" class="input">
                 </div>

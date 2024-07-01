@@ -7,17 +7,21 @@ use App\Models\Product;
 use App\Models\ProductCatalogue;
 use App\Models\User;
 use App\Services\Interfaces\ProductServiceInterface as ProductService;
+use App\Services\Interfaces\ProductCatalogueServiceInterface as ProductCatalogueService ;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
 class StoreController extends Controller
 {   
     protected $productService;
+    protected $productCatalogueService;
     public function __construct(
-        ProductService $productService
+        ProductService $productService,
+        ProductCatalogueService $productCatalogueService
     )
     {
         $this->productService = $productService;
+        $this->productCatalogueService = $productCatalogueService;
     }
 
     public function index(Request $request){
@@ -29,15 +33,13 @@ class StoreController extends Controller
 
     public function review(int $id){
         $product = $this->productService->get($id);
+        $productCatalogue = $this->productCatalogueService->get($product->products_catalogue_id);
+        $productAncestors = $this->productCatalogueService->getAncestors($productCatalogue->id);
         $other = Product::where('products_catalogue_id','=',$product->products_catalogue_id)->paginate(4);
-        return view('store.review',compact('product','other'));
+        return view('store.review',compact('product','other','productCatalogue','productAncestors'));
     }
 
     public function pay(Request $request){
-        // $this->productService->storevalidate($request);
-        // $products = Product::find($id);
-        // $quantity = $request->input('quantity');
-        // $size = $request->input('size');
         $user = User::find(Auth::id());
         return view('store.pay',compact('user'));
     }
@@ -50,8 +52,9 @@ class StoreController extends Controller
     public function addToCart(Request $request){
         $this->productService->addtocart($request);
     }
+    
 
-    public function deleteItem( $id){
+    public function deleteItem($id){
         $this->productService->delete_item($id);
         return redirect(route('store.cart'));
     }

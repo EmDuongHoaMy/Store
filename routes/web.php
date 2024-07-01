@@ -9,12 +9,15 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProductCatalogueController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TestController;
 
 
 Route::get('/',[HomeController::class,'home'])->name('home');
 Route::get('/ajax/location/district/',[LocationController::class,'getDistrict']);
 Route::get('/ajax/location/ward/',[LocationController::class,'getWard']);
 Route::get('/ajax/getdoc/',[ProductCatalogueController::class,'getDescription']);
+Route::get('/ajax/complete_search/',[TestController::class,'searchAutocomplete']);
+
 Route::prefix('/user')->group(function(){
     Route::get('/login',[UserController::class,'login'])->name('user.login');
     Route::post('/login',[UserController::class,'postlogin'])->name('user.postlogin');
@@ -70,3 +73,6 @@ Route::prefix('/store')->group(function(){
     Route::get('/index_by_catalogue/{id}',[StoreController::class,'index_by_catalogue'])->middleware(AuthMiddleware::class)->name('store.index_by_catalogue');    
     Route::post('/order',[StoreController::class,'order'])->middleware(AuthMiddleware::class)->name('store.order');
 });
+
+Route::get('test', [TestController::class, 'index']);
+Route::get('search-autocomplete', [TestController::class, 'searchAutocomplete']);

@@ -45,18 +45,6 @@ class ProductService implements ProductServiceInterface
     }
 
     public function create(Request $request){
-        // Tạo đường dẫn ảnh
-        // if ($files = $request->file('image')) {
-        //     //insert new file
-        //     $destinationPath = 'products/images/'; // upload path
-        //     $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-        //     $files->move($destinationPath, $profileImage);
-        //     $image = "products/images/$profileImage";
-        //  }
-        //  else {
-        //     $image = "";
-        //  }
-
         $image = $this->getImageUrl($request);
         Product::create([
             'name'=>$request->input('name'),
@@ -92,9 +80,11 @@ class ProductService implements ProductServiceInterface
             'size'=>'Vui lòng chọn size muốn mua',
             'quantity'=>"Hãy chọn số lượng mà bạn muốn mua"
         ]);
+        return $validate;
     }
 
     public function addtocart(Request $request){
+        $this->storevalidate($request);
         $productId = $request->input('id');
         $quantity = $request->input('quantity', 1);
         $size = $request->input('size');
@@ -133,7 +123,7 @@ class ProductService implements ProductServiceInterface
         foreach ($cart as $item) {
             $totalQuantity += $item['quantity'];
         }
-        return response()->json(['message' => 'Cart updated', 'cartCount' => $totalQuantity], 200);
+        return response()->json(['message' => 'Thêm vào giỏ thành công', 'cartCount' => $totalQuantity], 200);
     }
 
     public function delete_item(string $id){
@@ -151,7 +141,7 @@ class ProductService implements ProductServiceInterface
             $product = Product::where('products_catalogue_id','like',$product_catalogue->id)->get()->toArray();
             //Tìm các nhóm con của nó
             $child = $product_catalogue->descendants()->get();
-            // dd($product);die;
+            // dd($child);die;
             foreach ($child as $item) {
             //Lấy các sản phẩm của nhóm con và thêm chúng vào mảng sản phẩm
             $product_child = Product::where('products_catalogue_id', 'like',$item->id)->get()->toArray();

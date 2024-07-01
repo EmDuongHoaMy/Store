@@ -19,12 +19,12 @@ function addCart(){
         data: jQuery.param(option) ,
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         success: function(res) {
-            alert('Cart Updated');
+            confirm('Thêm vào giỏ hàng thành công');
             $('#cart-quantity').text(response.cartCount);
             console.table(res);
         },
         error: function(xhr, status, error) {
-            // console.error(error);
+            console.error(error);
         }
     });
 }

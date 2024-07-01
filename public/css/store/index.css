@@ -9,3 +9,7 @@
 .card_text{
     text-decoration: none;
 }
+.card_image{
+    width: 200px;
+    height: 260px;
+}

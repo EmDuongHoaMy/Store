@@ -6,9 +6,27 @@
 @section('store.main')
 {{-- CSS --}}
 {{-- Note:lưu ý --}}
-<div class="note bg-secondary text-center">
+{{-- <div class="note bg-secondary text-center">
     <p style="font-size:20px;">Miễn phí ship khi giá trị đơn hàng từ 500,000 trở lên</p>
-</div>
+</div> --}}
+{{-- Danh sách thư mục --}}
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+    <ul class="navbar-nav" style="padding-left:2% ">
+        @foreach ($productAncestors as $item)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('store.index_by_catalogue',$item->id) }}"><span>{{ $item->name }}  --></span></a>
+        </li>
+        @endforeach
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('store.index_by_catalogue',$productCatalogue->id) }}"><span>{{ $productCatalogue->name }} --></span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><span>{{ $product->name }}</span></a>
+        </li>
+    </ul>
+    </div>
+</nav>
 {{-- khu vực 1 --}}
 <div class="box_1 d-flex">
     {{-- khu vực 1.1 : hiển thị ảnh sản phẩm --}}
@@ -55,13 +73,14 @@
                 </div >
 
                 <div class="mt-3 d-flex" style="width:100%;height:50px;">
-                {{-- <button type="submit" class="btn-danger block full-width m-b center-block" style="width:50%;height:100%;">
-                    <i class="fab fa-buysellads"></i> Mua hàng
-                </button> --}}
-
-                <button type="button" onclick="addCart()" class="btn-primary block full-width m-b center-block" style="width:50%;height:100%;">
+                <button type="button" onclick="addCart()" class="btn-primary block full-width m-b center-block" style="height:100%;">
                     <i class="fas fa-store"></i> Thêm vào giỏ hàng
                 </button>
+                <a href="{{ route('store.cart') }}" style="width:50%;height:100%;">
+                    <button type="button" onclick="addCart()" class="btn-danger block center-block" style="height:100%;">
+                        <i class="fas fa-store"></i> Mua hàng
+                    </button>
+                </a>
                 </div>
             </form>
         </div>
@@ -88,11 +107,11 @@
 {{-- khu vực 2 : hiển thị mô tả sản phẩm --}}
 <div class="box_2">
     <h3 style="text-align:center">Mô tả sản phẩm </h3>
-    <pre style="font-size:20px;white-space: pre-line">
-   <?php
-           echo $product->description;
-    ?>
-    </pre>
+    <div style="font-size:15px;margin-top:30px">
+        @php
+            echo $product->description;
+        @endphp
+    </div>
 </div>
 {{-- khu vực 3 : hiển thị thêm các sản phẩm khác --}}
 <div>
@@ -101,9 +120,9 @@
         @foreach ($other as $item)
         <div class="card text-lg-center box">
             <a href="{{ route('store.review',$item->id) }}">
-                <img src="{{ asset("$item->images")}}" class="card-img-top" alt="...">
-                <div class="card-body" >
-                    <p class="text-dark text-color">{{ $item->name }}</p>
+                <img src="{{ asset("$item->images")}}" class="card-img-top card_image">
+                <div class="card-body">
+                    <p class="text-dark text-color"  style="text-decoration-line: none" >{{ $item->name }}</p>
                     @php
                     $formated_number = number_format($item->price,0,',',',');
                     @endphp

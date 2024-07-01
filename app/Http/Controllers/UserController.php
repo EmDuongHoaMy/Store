@@ -60,7 +60,7 @@ class UserController extends Controller
     }
 
     public function index(Request $request){
-        $users = $this->userService->patinate($request);
+        $users = $this->userService->paginate($request);
         return view('user.index',compact('users','request'));
     }
 

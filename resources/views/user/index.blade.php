@@ -2,6 +2,7 @@
 
 @section('script')
     <link rel="stylesheet" href="{{ asset('css/sign.css') }}">
+    <script src="{{ asset('js/complete_search.js') }}"></script>
 @endsection
 
 @section('user.main')
@@ -13,7 +14,7 @@
                 {{-- form tìm kiếm --}}
                 <li class="nav-item me-2">
                     <form class="d-flex" role="search" action="{{ route('user.index') }}">
-                        <input class="form-control " type="search" name="keyword" value="{{ $request->input('keyword') ?? old('keyword') }}" placeholder="Nhập từ khoá muốn tìm kiếm" aria-label="Search"style="width: 250px">
+                        <input class="form-control " id="search" type="search" name="keyword" value="{{ $request->input('keyword') ?? old('keyword') }}" placeholder="Nhập từ khoá muốn tìm kiếm" aria-label="Search"style="width: 250px">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                       </form>
                 </li>

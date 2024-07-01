@@ -26,7 +26,7 @@
                             <span class="text-danger">{{ $errors->first('description') }}</span>
                         @endif
                     </div>
-                    <input type="text" name="description" id="description" placeholder="Nhập mô tả nhóm" class="input">
+                    <textarea name="description" id="description" placeholder="Nhập mô tả nhóm" class="input"></textarea>
                 </div>
 
                 <div class="input_box">
@@ -36,4 +36,7 @@
             </form>
         </div>
     </div>
+@endsection
+@section('script-2')
+<script src="{{ asset('js/description_ckeditor.js') }}"></script>
 @endsection

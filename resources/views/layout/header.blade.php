@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="padding-left:2% ">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ route('home') }}"><i class="fa-solid fa-house"> </i></a>
+      <a class="navbar-brand" href="{{ route('home') }}"><i class="fa-solid fa-house"> </i> HOME</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -14,7 +14,7 @@
             <a class="nav-link" href="{{ route('store.index') }}"><i class="fa-solid fa-store"> </i> STORE</a>
           </li>
 
-          <li class="nav-item dropdown">
+          {{-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 MORE <i class="fa-solid fa-angles-right"></i>
             </a>
@@ -24,7 +24,7 @@
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
-          </li>
+          </li> --}}
         </ul>
         <form class="d-flex">
           @guest
@@ -43,15 +43,21 @@
               @endforeach
           @endif
 
-          <div style="height:20px;margin-top:10px;margin-right:5px ">
-            <a class="btn btn-outline-danger" href="{{ route('store.cart') }}">
+          <div class="dropdown" style="margin-right:10px">
+            <a class="btn btn-outline-secondary" href="{{ route('store.cart') }}">
               <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge text-bg-danger" id="cart-quantity">{{ $totalQuantity }}</span>
            </a>
           </div>
 
-          <p class="mt-3">Xin chào, {{ Auth::user()->name }}</p>
-
-          <button type="button" class="btn"><a href="{{ route('user.logout') }}" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></button>              
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Xin chào , {{ Auth::user()['name'] }} 
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li ><button type="button" class="btn"><a href="{{ route('user.logout') }}" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></button></li>
+            </ul>
+          </div>
+          
           @endguest         
         </form>
       </div>

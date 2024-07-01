@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ asset('css/sign.css') }}">
     <script src="{{ asset('js/goback.js') }}"></script>
     <script src="{{ asset('js/getdesofcata.js') }}"></script>
-    @endsection
+@endsection
 @section('product.main')
     <div class="main">
         <h4>Thêm mới sản phẩm</h4>
@@ -27,7 +27,7 @@
                             <span class="text-danger">{{ $errors->first('description') }}</span>
                         @endif
                     </div>
-                    <input type="text" name="description" id="description" placeholder="Nhập mô tả sản phẩm" class="input">
+                    <textarea class="input_text" name="description" id="description" placeholder="Nhập mô tả sản phẩm"></textarea>  
                 </div>
 
                 <div class="input_box">
@@ -35,11 +35,10 @@
                         <label for="products_catalogue_id"><h6>Tùy chọn nhóm sản phẩm : </h6></label>
                         <span id="catalogue_des" class="text-danger"></span>
                     </div>
-                    <select name="products_catalogue_id" id="products_catalogue_id">
-                        <option value="">-- Tùy chọn nhóm sản phẩm --</option>
-                        @foreach ($productcatalogue_all as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endforeach
+
+                    <select class="dynamic-select" >
+                        <option value=""> Tùy chọn nhóm sản phẩm </option>
+                        <option value="1" class="text-center">Thời trang</option>
                     </select>
                 </div>
 
@@ -70,4 +69,7 @@
             </form>
         </div>
     </div>
+@endsection
+@section('script-2')
+<script src="{{ asset('js/description_ckeditor.js') }}"></script>
 @endsection

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
  */
 interface UserServiceInterface
 {
-    public function patinate(Request $request);
+    public function paginate(Request $request);
     public function validate(Request $request);
     public function create(Request $request);
     public function update(int $id,Request $request);

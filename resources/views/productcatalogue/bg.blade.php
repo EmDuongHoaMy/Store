@@ -3,7 +3,7 @@
     ProductCatalogueManager
 @endsection
 @section('main')
-    <div style="margin-top:60px ">
+    <div style="margin-top:70px ">
         <div class="container-fluid">
             <div class="row flex-nowrap">
                 @include('layout.manager_sidebar')

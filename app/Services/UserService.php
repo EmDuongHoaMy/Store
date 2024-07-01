@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class UserService implements UserServiceInterface
 {
-    public function patinate(Request $request){
+    public function paginate(Request $request){
         $keyword = $request->input('keyword');
         if ($keyword==null) {
             $user = User::paginate(30);

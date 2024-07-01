@@ -17,4 +17,6 @@ interface ProductCatalogueServiceInterface
     public function destroy(int $id);
     public function get($id);
     public function getAll();
+    public function getAncestors($id);
+
 }

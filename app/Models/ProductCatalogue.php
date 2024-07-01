@@ -10,6 +10,7 @@ class ProductCatalogue extends Model
 {
     use HasFactory,NodeTrait;
     protected $fillable = [
+        'id',
         'name',
         'description',
         'canonical',

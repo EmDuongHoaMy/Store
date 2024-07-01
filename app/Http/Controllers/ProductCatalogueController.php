@@ -24,6 +24,7 @@ class ProductCatalogueController extends Controller
     }
 
     public function add(){
+        
         $productcatalogue = $this->productCatalogueService->getAll();
         return view('productcatalogue.create',compact('productcatalogue'));
     }
@@ -60,8 +61,13 @@ class ProductCatalogueController extends Controller
     }
 
     public function getDescription(Request $request){
-        $productcatalogue = $this->productCatalogueService->get($request->input('products_catalogue_id'));
-        return response()->json($productcatalogue);
+        $catalogue_id = $request->input('products_catalogue_id');
+        $child = [];
+        if ($catalogue_id) {
+            $productcatalogue = $this->productCatalogueService->get($catalogue_id);
+            $child = $productcatalogue->children()->get();
+        }
+        return response()->json($child);
     }
 
 
