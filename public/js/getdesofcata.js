@@ -4,9 +4,8 @@ $(document).ready(function() {
     $(document).on('change', '.dynamic-select', function() {
         // Get the selected value
         var selectedValue = $(this).val();
-        $('.dynamic-select').attr("name","");
-        $(this).attr("name","products_catalogue_id");
         var currentSelect = $(this);
+        $("#products_catalogue_id").attr("value",selectedValue);
         var selectedText = $(this).find("option:selected").text();
         $.ajax({
             url: '/ajax/getdoc/',
@@ -21,12 +20,12 @@ $(document).ready(function() {
                         currentSelect.nextAll('.dynamic-select').remove();
             
                         // Create a new select element
-                        var newSelect = $('<select class="dynamic-select"></select>');
+                        var newSelect = $('<select class="form-select dynamic-select"></select>');
             
                         // Add options to the new select element
                         newSelect.append('<option value="">Tùy chọn nhóm sản phẩm</option>');
                         $.each(res, function(key, child) {
-                            newSelect.append('<option class = "text-center" value="' + child.id + '">' + child.name + '</option>');
+                            newSelect.append('<option class = "" value="' + child.id + '">' + child.name + '</option>');
                         });
             
                         // Append the new select element after the current one
@@ -35,9 +34,12 @@ $(document).ready(function() {
                 }
                 else{
                     currentSelect.nextAll('.dynamic-select').remove();
+                    var prevSelect = currentSelect.prev('.dynamic-select');
+                    $("#products_catalogue_id").attr("value",prevSelect.val());
+                    selectedText = prevSelect.find("option:selected").text();
                 }
                 $('#catalogue_des').empty();
-                $('#catalogue_des').append(selectedText);                
+                $('#catalogue_des').append(selectedText);
             },
             error: function(xhr, status, error) {
                 // console.error(error);

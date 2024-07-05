@@ -3,14 +3,18 @@
 namespace App\Services;
 
 // use App\Models\User;
+
+use App\Models\Attribute;
 use App\Services\Interfaces\ProductServiceInterface;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\ProductCatalogue;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Faker\Factory as Faker;
-
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class ProductService
@@ -33,34 +37,55 @@ class ProductService implements ProductServiceInterface
         $validate = $request->validate([
         'name'  =>'required',
         'description'=>'required',
-        'price' =>'required',
-        'image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        'price' =>'required'
+
         ],[
         'name.required'=>'Tên sản phẩm không được để trống',
         'description'=>'Mô tả sản phẩm không được để trống',
-        'price' => 'Giá sản phẩm không thể để trống',
-        'image' => 'Hình ảnh định dạng không phù hợp'
+        'price' => 'Giá sản phẩm không thể để trống'
         ]);
         return $validate;
     }
 
     public function create(Request $request){
         $image = $this->getImageUrl($request);
-        Product::create([
+        DB::enableQueryLog();
+       try{
+        $product = Product::create([
             'name'=>$request->input('name'),
             'description'=>$request->input('description'),
             'price' =>$request->input('price'),
             'products_catalogue_id'=> $request->input('products_catalogue_id'),
-            'images'=>$image
+            'images'=>json_encode($image)
         ]);
+       }catch(Exception $e){
+        // dd($image);
+        // dd(DB::getQueryLog());
+       }
+
+       $sizes = $request->input("sizes");
+       $attribute_id = 1;
+       foreach ($sizes as $value){
+        ProductAttribute::create([
+            'product_id' => $product->id,
+            'attribute_value' => $value['size'],
+            'quantity' => $value['quantity']
+        ]);
+        $product['quantity'] += $value['quantity'];
+       }
+       $product->save();
     }
 
     public function update(int $id,Request $request){
+        $image = $this->getImageUrl($request);
+        DB::enableQueryLog();
         $product = Product::find($id);
         $product->name = $request->input('name');
         $product->description = $request->input('description');
+        $product->products_catalogue_id = $request->input('products_catalogue_id');
         $product->price = $request->input('price');
-        $product->images = $request->file('image') != null ? $this->getImageUrl($request) : $product->images;
+        $product->images = ($request->file('images'))?json_encode($image):$product->images;
+        $product->quantity = $request->input('quantity');
         $product->save();
     }
 
@@ -153,16 +178,19 @@ class ProductService implements ProductServiceInterface
 
     public function getImageUrl(Request $request){
         // Tạo đường dẫn ảnh
-        if ($files = $request->file('image')) {
-            //insert new file
-            $destinationPath = 'products/images/'; // upload path
-            $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
-            $files->move($destinationPath, $profileImage);
-            $image = "products/images/$profileImage";
+            $image = [];
+        $i = 1; 
+        if ($request->hasfile('images')) {
+            $files = $request->file('images');
+            foreach ($files as $file) {
+                $destinationPath = 'products/images/'; // upload path
+                $profileImage = $i.date('YmdHis') . "." . $file->getClientOriginalExtension();
+                $i++;
+                $file->move($destinationPath, $profileImage);
+                $image[] = "products/images/$profileImage";
+            }
          }
-         else {
-            $image = "";
-         }
+
         return $image; 
     }
 }

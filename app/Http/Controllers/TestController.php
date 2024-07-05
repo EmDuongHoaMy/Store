@@ -7,8 +7,7 @@ class TestController extends Controller
 {
     public function index()
     {
-        $a = str_replace('xo','viet','duong xo');
-        echo $a;
+        return view("test");
 
     }
      public function searchAutocomplete(Request $request)

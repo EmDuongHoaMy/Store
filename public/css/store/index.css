@@ -13,3 +13,12 @@
     width: 200px;
     height: 260px;
 }
+.multi-line-ellipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Hiển thị tối đa 2 dòng */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* padding: 2px; Thêm khoảng cách bên trong để dễ nhìn thấy */
+    /* width: 200px; Đặt độ rộng cố định hoặc tối đa cho phần tử */
+}

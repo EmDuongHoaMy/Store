@@ -13,13 +13,16 @@
 </div>
 {{-- Danh sách sản phẩm --}}
 <h3 style="margin:10px;text-align:center;margin-top:35px;color:brown ">GỢI Ý HÔM NAY</h3>
-<div class="row -mt-5" style="margin-top:20px;padding-left:20px">
+<div class="row mt-5" >
     @foreach ($product as $item)
-    <div class="card text-lg-center box">
-        <a href="{{ route('store.review',$item->id) }}">
-            <img src="{{ $item->images}}" class="card-img-top card_image" alt="...">
+    <div class="card text-lg-center box" style="width:15rem">
+        <a href="{{ route('store.review',$item->id) }}" class="text-decoration-none">
+            @php
+                $images = json_decode($item->images,true);
+            @endphp
+            <img src="{{ $images[0]}}" class="card-img-top card_image" alt="...">
             <div class="card-body" >
-                <p class="text-dark text-color">{{ $item->name }}</p>
+                <p class="text-dark fs-5 multi-line-ellipsis">{{ $item->name }}</p>
                 @php
                     $formated_number = number_format($item->price,0,',',',');
                 @endphp

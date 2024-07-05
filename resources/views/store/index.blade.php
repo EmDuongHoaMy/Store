@@ -4,10 +4,9 @@
 @endsection
 @section('store.main')
 <div class="ibox-content ">
-    <label for=""><h3>Danh sách sản phẩm</h3></label>   
-
+    <h2 class="mb-3 text-center">Danh sách sản phẩm</h2>   
     {{-- Danh sách nhóm sản phẩm --}}
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark mt-3">
         <div class="container-fluid">
         <ul class="navbar-nav">
             @foreach ($product_catalogue as $item)
@@ -19,7 +18,7 @@
         </div>
     </nav>
     {{-- Các chức năng --}}
-    <nav class="navbar navbar-expand-sm">
+    <nav class="navbar navbar-expand-sm mt-3">
         <ul class="navbar-nav">
             {{-- form tìm kiếm --}}
             <li class="nav-item me-2">
@@ -33,24 +32,26 @@
 </div>
 
 {{-- Danh sách sản phẩm --}}
-<div class="row -mt-5" style="margin-top:20px;padding-left:20px">
+<div class="row pl-1">
     @foreach ($product as $id =>$item)
 
-    <div class="card text-lg-center box nav-link">
-        <a href="{{ route('store.review',$item['id']) }}">
+    <div class="card text-lg-center box nav-link ml-auto" style="width:15rem">
+        <a href="{{ route('store.review',$item['id']) }}" class="text-decoration-none text dark">
             @php
-                $imageURL = $item['images'];
+                $images = json_decode($item['images'], true);
             @endphp
-            <img src="{{ isset($item['images']) ? asset("$imageURL") : 'N/A'}}" class="card-img-top card_image" alt="...">
+            <img src="{{ isset($images) ? asset("$images[0]") : 'N/A'}}" class="card-img-top card_image" alt="...">
             <div class="card-body" style="text-decoration:none" >
-                <p class="text-dark text-decoration-none">{{ $item['name'] }}</p>
-                <h5 class="text-danger text-decoration-none">{{ number_format($item['price'],0,',',',') }} VND</h5>
+                <p class="text-dark fs-5 multi-line-ellipsis">{{ $item['name'] }}</p>
+                @if ($item['quantity'])
+                <h5 class="text-danger mt-auto">{{ number_format($item['price'],0,',',',') }} VND</h5>
+                @else
+                <span class="alert alert-danger mt-auto">Hết hàng</span>    
+                @endif
             </div>
         </a>
     </div>
     @endforeach
 </div> 
-{{-- <div style="margin-left:40%;margin-top:20px  " class="text-danger">
-    {{ $product->links('pagination::bootstrap-4') }}
-</div> --}}
+
 @endsection

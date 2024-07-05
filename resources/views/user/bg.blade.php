@@ -3,7 +3,7 @@
     UserManager
 @endsection
 @section('main')
-    <div style="margin-top:70px ">
+    <div style="margin-top:50px ">
         <div class="container-fluid">
             <div class="row flex-nowrap">
                 @include('layout.manager_sidebar')

@@ -28,8 +28,8 @@
         </ul>
         <form class="d-flex">
           @guest
-          <button type="button" class="btn"><a href="{{ route('user.login') }}" class="nav-item text-dark" style="text-decoration-line: none">Đăng nhập</a></button>
-          <button type="button" class="btn" style="margin-left:10px"><a href="{{ route('user.signin') }}" class="nav-item text-dark" style="text-decoration-line: none">Đăng ký</a></button>
+          <button type="button" class="btn btn-warning"><a href="{{ route('user.login') }}" class="nav-item text-dark" style="text-decoration-line: none">Đăng nhập</a></button>
+          <button type="button" class="btn btn-warning" style="margin-left:10px"><a href="{{ route('user.signin') }}" class="nav-item text-dark" style="text-decoration-line: none">Đăng ký</a></button>
           @else
           @php
           $totalQuantity = 0;
@@ -54,6 +54,8 @@
               Xin chào , {{ Auth::user()['name'] }} 
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li ><button type="button" class="btn"><a href="{{ route('user.info') }}" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-user me-2"></i> Thông tin tài khoản</a></button></li>
+              <li ><button type="button" class="btn"><a href="#" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-gear"></i> Cài đặt</a></button></li>
               <li ><button type="button" class="btn"><a href="{{ route('user.logout') }}" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></button></li>
             </ul>
           </div>

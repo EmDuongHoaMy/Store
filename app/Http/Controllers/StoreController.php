@@ -32,7 +32,7 @@ class StoreController extends Controller
     }
 
     public function review(int $id){
-        $product = $this->productService->get($id);
+        $product = $this->productService->get($id);   
         $productCatalogue = $this->productCatalogueService->get($product->products_catalogue_id);
         $productAncestors = $this->productCatalogueService->getAncestors($productCatalogue->id);
         $other = Product::where('products_catalogue_id','=',$product->products_catalogue_id)->paginate(4);

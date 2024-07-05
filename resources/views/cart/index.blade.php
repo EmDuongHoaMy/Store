@@ -25,9 +25,9 @@
                     <td data-th="Product">
                         <div class="row">
                             @php
-                                $imageURL = $item['images'];
+                                $images = json_decode($item['images'], true);
                             @endphp
-                            <div class="col-sm-3 hidden-xs"><a href="{{ route('store.review',$item['product_id']) }}"><img src="{{ isset($item['images']) ? asset("$imageURL") : 'N/A' }}" class="card-img-top"/></a></div>
+                            <div class="col-sm-3 hidden-xs"><a href="{{ route('store.review',$item['product_id']) }}"><img src="{{ isset($images) ? asset("$images[0]") : 'N/A' }}" class="card-img-top"/></a></div>
                             <div class="col-sm-9">
                                 <h4 class="nomargin">{{ $item['name'] }}</h4>
                             </div>

@@ -5,52 +5,54 @@
     <script src="{{ asset('js/parent.js') }}"></script>
 @endsection
 @section('productcatalogue.main')
-    <div class="main">
-        <h4>Thêm mới nhóm sản phẩm</h4>
-        <div class="box">
-            <form action="{{ route('productcatalogue.create') }}" method="post">
-                @csrf
-                <div class="input_box">
-                    <div class="input_label">
-                        <label for="name"><h6>Tên nhóm sản phẩm : </h6></label>
-                        @if ($errors->has('name'))
-                        <span class="text-danger">{{ $errors->first('name') }}</span>
-                        @endif
-                    </div>
-                    <input type="text" name="name" id="name" placeholder="Nhập tên nhóm sản phẩm" class="input input_label">
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title text-center">Thêm mới nhóm sản phẩm</h2>
                 </div>
-                
-                <div class="input_box">
-                    <div class="input_label">
-                        <label for="description"><h6>Nhập mô tả nhóm sản phẩm : </h6></label>
-                        @if ($errors->has('description'))
-                            <span class="text-danger">{{ $errors->first('description') }}</span>
-                        @endif
-                    </div>
-                    <textarea name="description" id="description" placeholder="Nhập mô tả nhóm sản phẩm" class="input"></textarea>
-                </div>
+                <div class="card-body">
+                    <form action="{{ route('productcatalogue.create') }}" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Tên nhóm sản phẩm:</label>
+                            <input type="text" name="name" id="name" placeholder="Nhập tên nhóm sản phẩm" class="form-control">
+                            @if ($errors->has('name'))
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                            @endif
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Mô tả nhóm sản phẩm:</label>
+                            <textarea name="description" id="description" placeholder="Nhập mô tả nhóm sản phẩm" class="form-control"></textarea>
+                            @if ($errors->has('description'))
+                                <span class="text-danger">{{ $errors->first('description') }}</span>
+                            @endif
+                        </div>
 
-                <div class="input_box">
-                    <div class="input_label">
-                        <label for="parent_id"><h6>Tùy chọn nhóm cha : </h6></label>
-                        <span id="catalogue_des" class="text-danger"></span>
-                    </div>
-                    <select name="parent_id" id="parent_id">
-                        <option value="">-- Tùy chọn nhóm cha --</option>
-                        @foreach ($productcatalogue as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endforeach
+                        <div class="mb-3">
+                            <label for="parent_id" class="form-label">Tùy chọn nhóm cha:</label>
+                            <span id="catalogue_des" class="text-success"></span>
+                            <input type="number" name="parent_id" id="parent_id" hidden>
+                            <select class="form-control dynamic-select">
+                                <option value="">Chọn nhóm cha</option>
+                                <option value="1">Thời trang</option>
+                                {{-- Các option khác --}}
+                            </select>
+                        </div>
 
-                    </select>
+                        <div class="mb-3 justify-content-end">
+                            <button type="button" onclick="goback()" class="btn btn-primary">Trở lại</button>
+                            <button type="submit" class="btn btn-danger">Đăng ký nhóm</button>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="input_box">
-                    <button type="button" onclick="goback()" class="btn btn-primary">Trở lại</button>
-                    <button type="submit" class="btn btn-danger">Đăng ký nhóm</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
+</div>
+
 @endsection
 @section('script-2')
 <script src="{{ asset('js/description_ckeditor.js') }}"></script>

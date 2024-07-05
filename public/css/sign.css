@@ -15,8 +15,12 @@
     max-width: 60%;
 }
 .main{
-    margin-left: 10%;
+    margin-left: 300px;
 }
 .input_label{
     display: block;
+}
+.dynamic-select{
+    display: block;
+    margin-top: 10px;
 }

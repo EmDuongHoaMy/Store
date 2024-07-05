@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->bigInteger('price')->nullable();
             $table->string('description')->nullable();
-            $table->integer('quantity')->default(10);
-            $table->string('images')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->json('images')->nullable();
             $table->bigInteger('products_catalogue_id')->nullable();
             $table->timestamps();
         });

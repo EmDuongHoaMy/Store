@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\Interfaces\UserServiceInterface as UserService;
 use App\Repositories\Interfaces\ProvinceRepositoryInterface as ProvinceRepository;
@@ -80,7 +81,7 @@ class UserController extends Controller
         $province_all = $this->provinceRepository->getAll();
         $province = $this->provinceRepository->getProvince($users->province_id);
         $district = $this->districtRepository->getDistrict($users->district_id);
-        return view('user.update',compact('users','province','province_all'));
+        return view('user.update',compact('users','province','district','province_all'));
     }
 
     public function update($id,Request $request){
@@ -97,6 +98,14 @@ class UserController extends Controller
         $this->userService->destroy($id);
         return redirect(route('user.index'))->with('success','Xoá thông tin thành công');
 
+    }
+
+    public function info(){
+        $user = User::find(Auth::id());
+        $province_all = $this->provinceRepository->getAll();
+        $province = $this->provinceRepository->getProvince($user->province_id);
+        $district = $this->districtRepository->getDistrict($user->district_id);
+        return view('user.info',compact('user','province_all','province','district'));
     }
 
 

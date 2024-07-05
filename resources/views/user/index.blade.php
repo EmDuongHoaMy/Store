@@ -6,8 +6,8 @@
 @endsection
 
 @section('user.main')
-    <div class="ibox-content ">
-        <label for=""><h3>Quản lý thành viên</h3></label>
+    <div class="ibox-content m-5">
+       <h2 class="text-center mb-4">Quản lý thành viên</h2>
         {{-- Các chức năng --}}
         <nav class="navbar navbar-expand-sm">
             <ul class="navbar-nav">

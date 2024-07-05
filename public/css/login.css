@@ -1,17 +1,13 @@
-.box{
-    width: 1600px;
-    height: 60%;
+
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #fff;
 }
-.input{
-    width: 60%;
-    height: 30px;
-}
-.input_box{
-    margin-top: 20px;
-}
-.main{
-    margin-left: 20%;
-}
-.input_label{
-    display: block;
+.login-title {
+    margin-bottom: 20px;
+    text-align: center;
 }

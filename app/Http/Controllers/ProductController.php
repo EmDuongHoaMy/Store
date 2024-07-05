@@ -35,7 +35,7 @@ class ProductController extends Controller
     public function create(Request $request){
         $this->productService->validate($request);
         $this->productService->create($request);
-        return redirect(route('product.index'))->with('success','Thêm mới thành viên thành công');   
+        return redirect(route('product.index'))->with('success','Thêm mới sản phẩm thành công');   
     }
 
     public function edit($id){

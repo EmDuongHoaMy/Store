@@ -1,7 +1,7 @@
 @extends('productcatalogue.bg')
 @section('productcatalogue.main')
-    <div class="ibox-content ">
-        <label for=""><h3>Quản lý nhóm sản phẩm</h3></label>
+    <div class="ibox-content m-5 ">
+        <h2 class="text-center mb-4">Quản lý nhóm sản phẩm</h2>
         {{-- Các chức năng --}}
         <nav class="navbar navbar-expand-sm">
             <ul class="navbar-nav">

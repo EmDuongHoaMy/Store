@@ -9,7 +9,7 @@
         <div class="text-center box_1">
             <h3> THANH TOÁN ĐƠN HÀNG</h3> 
          </div>
-         <div>
+         <div class="card">
              <form action="{{ route('store.order') }}" method="POST">
                  @csrf
                  {{-- box 2 : Hiển thị thông tin sản phẩm --}}
@@ -35,9 +35,9 @@
                                      <td data-th="Product">
                                          <div class="row">
                                              @php
-                                                 $imageURL = $item['images']; 
-                                             @endphp
-                                             <div class="col-sm-3 hidden-xs"><a href="{{ route('store.review',$item['product_id']) }}"><img src="{{ isset($item['images']) ? asset("$imageURL") : 'N/A' }}" class="card-img-top"/></a></div>
+                                                $images = json_decode($item['images'], true);
+                                            @endphp
+                                             <div class="col-sm-3 hidden-xs"><a href="{{ route('store.review',$item['product_id']) }}"><img src="{{ isset($images) ? asset("$images[0]") : 'N/A' }}" class="card-img-top"/></a></div>
                                              <div class="col-sm-9">
                                                  <h4 class="nomargin">{{ $item['name'] }}</h4>
                                              </div>
@@ -63,7 +63,7 @@
                      </tbody>
                  </table>
                  {{-- box 3 : Hiển thị thông tin khách hàng --}}
-                 <div class="box_2">
+                 <div class="box_2 card">
                      <h4>THÔNG TIN NHẬN HÀNG</h4>
                          <div class="box">
                              {{-- <label for="id_khachhang"> Mã khách hàng : </label> --}}

@@ -31,6 +31,7 @@ Route::prefix('/user')->group(function(){
     Route::post('/update/{id}',[UserController::class,'update'])->name('user.update');
     Route::get('/delete/{id}',[UserController::class,'delete'])->middleware(AuthMiddleware::class)->name('user.delete');
     Route::post('/destroy/{id}',[UserController::class,'destroy'])->name('user.destroy');
+    Route::get('/info',[UserController::class,'info'])->middleware(AuthMiddleware::class)->name('user.info');
 });
 
 Route::prefix('/usercatalogue')->group(function(){
