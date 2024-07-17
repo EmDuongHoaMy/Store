@@ -41,10 +41,13 @@
                 </div>
                 @php
                     $i++;
+                    if ($i>4) {
+                    break;
+                }
                 @endphp
             @endforeach
         </div>
-        <div class="row text-center mt-2" style="margin-left:125px">
+        <div class="row text-center mt-2" style="margin-left:50px">
             @php
                 $i = 1;
             @endphp
@@ -54,6 +57,9 @@
             </div>
             @php
                 $i++;
+                if ($i>4) {
+                    break;
+                }
             @endphp
             @endforeach
         </div>
@@ -79,14 +85,12 @@
             <p class="text-danger fs-2">{{ $formattedValue }} VND</p>
             <form action="{{ route('store.pay',$product->id) }}" style="font-size:20px">
                 <div class="mt-3">
-                    <label for="size">Size:</label>
-                    <select name="size" id="size">
-                        <option value="">--Hãy chọn kích thước của bạn--</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
+                    <label for="attribute">Kích thước :</label>
+                    <select name="attribute" id="attribute" class="form-select">
+                        <option value="">Hãy chọn kích thước của bạn</option>
+                        @foreach ($attribute_id as $key=>$item)
+                            <option value="{{ $item['id'] }}">{{ $item->attribute_value }}</option>
+                        @endforeach
                     </select>
                     {{-- Cảnh báo nếu chưa chọn size --}}
                     <span>
@@ -132,7 +136,7 @@
 {{-- khu vực 2 : hiển thị mô tả sản phẩm --}}
 <div class="box_2">
     <h3 class="text-center mt-4">Mô tả sản phẩm </h3>
-    <div class="fs-5 mt-4">
+    <div class="fs-6 mt-4">
         @php
             echo $product->description;
         @endphp

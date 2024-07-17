@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('order_payments', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->bigInteger('price')->nullable();
-            $table->longText('description')->nullable();
-            $table->integer('quantity')->nullable();
-            $table->json('images')->nullable();
-            $table->bigInteger('products_catalogue_id')->nullable();
+            $table->unsignedBigInteger("order_id");
+            $table->string("payment_method");
+            $table->decimal("amount",10,2);
+
+            $table->foreign("order_id")->references("id")->on("orders")->cascadeOnDelete();
+
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('order_payments');
     }
 };

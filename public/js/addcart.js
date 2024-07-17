@@ -1,6 +1,6 @@
 function addCart(){
     var qtt = $('#quantity').val();
-    var sz = $('#size').val();
+    var attribute = $('#attribute').val();
     var id = $('#product_id').val();
     var cartItemId = $(this).data("cart-item-id");
     var _token = $('meta[name="csrf-token"]').attr('content');
@@ -8,7 +8,7 @@ function addCart(){
     let option = {
         // _token: '{{ csrf_token() }}',
         'id' : id,
-        'size' : sz,
+        'attribute' : attribute,
         'quantity':qtt,
         'cart_item_id': cartItemId
     }
@@ -20,7 +20,7 @@ function addCart(){
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         success: function(res) {
             confirm('Thêm vào giỏ hàng thành công');
-            $('#cart-quantity').text(response.cartCount);
+            $('#cart-quantity').text(res.cartCount);
             console.table(res);
         },
         error: function(xhr, status, error) {

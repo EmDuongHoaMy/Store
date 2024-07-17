@@ -33,7 +33,8 @@ class UserService implements UserServiceInterface
         $validate = $request->validate([
         'name'  =>'required',
         'email' =>'required|email|unique:users',
-        'password'=>'required|min:8|confirmed'
+        'password'=>'required|min:8|confirmed',
+        // 'user_catalogues_id'=>'required',
 
         ],[
             'name.required'=>'Tên không được để trống',
@@ -42,18 +43,20 @@ class UserService implements UserServiceInterface
             'email.unique' =>'Email đã được đăng ký ',
             'password.min' =>'Mật khẩu phải có ít nhất 8 ký tự',
             'password.confirmed'=>'Mật khẩu không trùng khớp',
-            'password.required'=>'Mật khẩu không thể để trống'
+            'password.required'=>'Mật khẩu không thể để trống',
+            // 'user_catalogues_id.required'=>"Phải chọn nhóm thành viên"
         ]);
         return $validate;
     }
 
     public function create(Request $request){
+
         User::create([
             'name'  =>$request->input('name'),
             'email' =>$request->input('email'),
             'address'=>$request->input('address'),
             'phone_number'=>$request->input('phone_number'),
-            'user_catalogues_id'=>2,
+            'user_catalogues_id'=>($request->input('user_catalogues_id'))?$request->input('user_catalogues_id'):3,
             'password'  =>Hash::make($request->input('password')),
             'province_id'=>$request->input('province_code'),
             'district_id'=>$request->input('district_code'),

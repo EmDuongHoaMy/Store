@@ -8,10 +8,13 @@
                 <i class="fa-solid fa-user-group me-2"></i> <span>UserGroup</span>
             </a>
             <a href="{{ route('product.index') }}" class="list-group-item border-end-0 d-inline-block text-truncate bg-light">
-                <i class="fa-solid fa-suitcase me-2"></i> <span>Products</span>
+                <i class="fa-solid fa-suitcase me-2"></i> <span>Product</span>
             </a>
             <a href="{{ route('productcatalogue.index') }}" class="list-group-item border-end-0 d-inline-block text-truncate bg-light">
-                <i class="fa-regular fa-folder-open me-2"></i> <span>ProductsCatalogue</span>
+                <i class="fa-regular fa-folder-open me-2"></i> <span>ProductCatalogue</span>
+            </a>
+            <a href="{{ route('order.index') }}" class="list-group-item border-end-0 d-inline-block text-truncate bg-light">
+                <i class="fa-solid fa-list-check me-2"></i> <span>Order</span>
             </a>
         </div>
     </div>

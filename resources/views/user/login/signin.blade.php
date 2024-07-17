@@ -40,6 +40,19 @@
                 @endif
             </div>
 
+            {{-- <div class="form-group mb-3">
+                <label for="user_catalogues_id" class="form-label"><h6>Nhóm thành viên :</h6></label>
+                <select name="user_catalogues_id" id="user_catalogues_id" class="form-select">
+                    <option value="">Chọn nhóm thành viên</option>
+                    @foreach ($user_catalogue as $item)
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+                    @if ($errors->has('user_catalogues_id'))
+                        <span class="text-danger">{{ $errors->first('user_catalogues_id') }}</span>
+                    @endif
+                </select>
+            </div> --}}
+
             <div class="mb-3">
                 <label for="phone_number" class="form-label"><h6>Số điện thoại :</h6></label>
                 <input type="text" name="phone_number" id="phone_number" placeholder="Nhập số điện thoại" class="form-control">

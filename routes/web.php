@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserCatalogueController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCatalogueController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Controllers\ProductController;
@@ -65,15 +66,22 @@ Route::prefix('/products_catalogue')->group(function(){
 });
 
 Route::prefix('/store')->group(function(){
-    Route::get('/index',[StoreController::class,'index'])->middleware(AuthMiddleware::class)->name('store.index');    
-    Route::get('/review/{id}',[StoreController::class,'review'])->middleware(AuthMiddleware::class)->name('store.review');
+    Route::get('/index',[StoreController::class,'index'])->name('store.index');    
+    Route::get('/review/{id}',[StoreController::class,'review'])->name('store.review');
     Route::get('/pay',[StoreController::class,'pay'])->middleware(AuthMiddleware::class)->name('store.pay');
     Route::get('/cart',[StoreController::class,'cart'])->middleware(AuthMiddleware::class)->name('store.cart');
     Route::get('/add_to_cart',[StoreController::class,'addToCart'])->middleware(AuthMiddleware::class)->name('store.addtocart');
     Route::get('/delete_item/{id}',[StoreController::class,'deleteItem'])->middleware(AuthMiddleware::class)->name('store.deleteitem');
-    Route::get('/index_by_catalogue/{id}',[StoreController::class,'index_by_catalogue'])->middleware(AuthMiddleware::class)->name('store.index_by_catalogue');    
+    Route::get('/index_by_catalogue/{id}',[StoreController::class,'index_by_catalogue'])->name('store.index_by_catalogue');    
     Route::post('/order',[StoreController::class,'order'])->middleware(AuthMiddleware::class)->name('store.order');
 });
 
 Route::get('test', [TestController::class, 'index']);
 Route::get('search-autocomplete', [TestController::class, 'searchAutocomplete']);
+
+Route::prefix('/order')->group(function(){
+    Route::get('/index',[OrderController::class,"index"])->middleware(AuthMiddleware::class)->name("order.index");
+    Route::get('/index/detail/{id}',[OrderController::class,"detail"])->middleware(AuthMiddleware::class)->name("order.detail");
+    Route::get('/ps_order',[OrderController::class,"psOrder"])->middleware(AuthMiddleware::class)->name("order.ps_order");
+    Route::get('/updateStatus/{id}',[OrderController::class,"updateStatus"])->middleware(AuthMiddleware::class)->name("order.updateStatus");
+});

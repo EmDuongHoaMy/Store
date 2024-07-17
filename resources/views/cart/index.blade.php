@@ -9,6 +9,7 @@
 <table id="cart" class="table table-bordered">
     <thead>
         <tr>
+            <th></th>
             <th>Product</th>
             <th>Price</th>
             <th>Size</th>
@@ -27,14 +28,12 @@
                             @php
                                 $images = json_decode($item['images'], true);
                             @endphp
-                            <div class="col-sm-3 hidden-xs"><a href="{{ route('store.review',$item['product_id']) }}"><img src="{{ isset($images) ? asset("$images[0]") : 'N/A' }}" class="card-img-top"/></a></div>
-                            <div class="col-sm-9">
-                                <h4 class="nomargin">{{ $item['name'] }}</h4>
-                            </div>
+                            <div class="col-sm-3 hidden-xs"><a href="{{ route('store.review',$item['product_id']) }}"><img src="{{ isset($images) ? asset("$images[0]") : 'N/A' }}" class="card-img-top" /></a></div>
                         </div>
                     </td>
+                    <td class="text-center">{{ $item['name'] }}</td>
                     <td data-th="Price">${{ number_format($item['price'],0,',',',') }}</td>
-                    <td class="text-center">{{ $item['size'] }}</td>
+                    <td class="text-center">{{ $item['attribute'] }}</td>
                     <td class="text-center">{{ $item['quantity'] }}</td>
                     @php
                         $total_price = $item['price'] * $item['quantity'];

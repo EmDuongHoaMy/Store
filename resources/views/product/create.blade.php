@@ -53,10 +53,10 @@
                             <div class="col">
                                 <select name="sizes[0][size]" id="" class="form-control">
                                     <option value="">Chọn kích thước</option>
-                                    <option value="s">S</option>
-                                    <option value="m">M</option>
-                                    <option value="l">L</option>
-                                    <option value="xl">XL</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
                                 </select>
                             </div>
                             <div class="col">

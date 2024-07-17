@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserCatalogue;
 use Illuminate\Http\Request;
 use App\Services\Interfaces\UserServiceInterface as UserService;
 use App\Repositories\Interfaces\ProvinceRepositoryInterface as ProvinceRepository;
@@ -51,7 +52,8 @@ class UserController extends Controller
 
     public function signin(){
         $province = $this->provinceRepository->getAll();
-        return view('user.login.signin',compact('province'));
+        $user_catalogue = UserCatalogue::all();
+        return view('user.login.signin',compact('province','user_catalogue'));
     }
 
     public function postsignin(Request $request){
@@ -67,7 +69,8 @@ class UserController extends Controller
 
     public function add(){
         $province = $this->provinceRepository->getAll();
-        return view('user.create',compact('province'));
+        $user_catalogue = UserCatalogue::all();
+        return view('user.create',compact('province','user_catalogue'));
     }
 
     public function create(Request $request){

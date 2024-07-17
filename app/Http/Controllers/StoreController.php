@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\ProductCatalogue;
 use App\Models\User;
 use App\Services\Interfaces\ProductServiceInterface as ProductService;
+use App\Services\Interfaces\OrderServiceInterface as OrderService;
 use App\Services\Interfaces\ProductCatalogueServiceInterface as ProductCatalogueService ;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
@@ -15,13 +17,16 @@ class StoreController extends Controller
 {   
     protected $productService;
     protected $productCatalogueService;
+    protected $orderService;
     public function __construct(
         ProductService $productService,
-        ProductCatalogueService $productCatalogueService
+        ProductCatalogueService $productCatalogueService,
+        OrderService $orderService
     )
     {
         $this->productService = $productService;
         $this->productCatalogueService = $productCatalogueService;
+        $this->orderService = $orderService;
     }
 
     public function index(Request $request){
@@ -35,8 +40,9 @@ class StoreController extends Controller
         $product = $this->productService->get($id);   
         $productCatalogue = $this->productCatalogueService->get($product->products_catalogue_id);
         $productAncestors = $this->productCatalogueService->getAncestors($productCatalogue->id);
+        $attribute_id = ProductAttribute::where("product_id","=",$id)->get();
         $other = Product::where('products_catalogue_id','=',$product->products_catalogue_id)->paginate(4);
-        return view('store.review',compact('product','other','productCatalogue','productAncestors'));
+        return view('store.review',compact('product','other','productCatalogue','productAncestors','attribute_id'));
     }
 
     public function pay(Request $request){
@@ -50,7 +56,8 @@ class StoreController extends Controller
     }
 
     public function addToCart(Request $request){
-        $this->productService->addtocart($request);
+        $totalQuantity = $this->productService->addtocart($request);
+        return response()->json(["cartCourt" => $totalQuantity]);
     }
     
 
@@ -67,6 +74,7 @@ class StoreController extends Controller
     }
 
     public function order(Request $request){
-        dd($request->all());
+        $this->orderService->create($request);
+        return back()->with('success',"Mua sản phẩm thành công");
     }
 }

@@ -99,23 +99,23 @@ class ProductService implements ProductServiceInterface
 
     public function storevalidate(Request $request){
         $validate = $request->validate([
-            'size'=>'required',
+            'attribute'=>'required',
             'quantity'=>'required'
         ],[
-            'size'=>'Vui lòng chọn size muốn mua',
+            'attribute'=>'Vui lòng chọn size muốn mua',
             'quantity'=>"Hãy chọn số lượng mà bạn muốn mua"
         ]);
         return $validate;
     }
 
     public function addtocart(Request $request){
-        $this->storevalidate($request);
+        // $this->storevalidate($request);
         $productId = $request->input('id');
         $quantity = $request->input('quantity', 1);
-        $size = $request->input('size');
+        $attribute = $request->input('attribute');
         $cartItemId = $request->input('cart_item_id');
         // Make card ID by size and product ID from request
-        $card_id = $size . '-' . $productId;
+        $card_id = $attribute . '-' . $productId;
 
         $product = Product::find($productId);
 
@@ -136,7 +136,7 @@ class ProductService implements ProductServiceInterface
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => $quantity,
-                'size' =>$size,
+                'attribute' =>$attribute,
                 'images'    =>$product->images
             ];
         }
@@ -148,7 +148,7 @@ class ProductService implements ProductServiceInterface
         foreach ($cart as $item) {
             $totalQuantity += $item['quantity'];
         }
-        return response()->json(['message' => 'Thêm vào giỏ thành công', 'cartCount' => $totalQuantity], 200);
+        return $totalQuantity;
     }
 
     public function delete_item(string $id){

@@ -16,6 +16,7 @@
                  <table id="cart" class="table table-bordered">
                      <thead>
                          <tr>
+                             <th></th>
                              <th>Product</th>
                              <th>Price</th>
                              <th>Size</th>
@@ -28,8 +29,7 @@
                          @php $total = 0 ;
                               $total_quantity = 0   ;
                          @endphp
-     
- 
+                         
                             @foreach(session('cart') as $id => $item)
                                  <tr rowId="{{ $id }}">
                                      <td data-th="Product">
@@ -38,13 +38,11 @@
                                                 $images = json_decode($item['images'], true);
                                             @endphp
                                              <div class="col-sm-3 hidden-xs"><a href="{{ route('store.review',$item['product_id']) }}"><img src="{{ isset($images) ? asset("$images[0]") : 'N/A' }}" class="card-img-top"/></a></div>
-                                             <div class="col-sm-9">
-                                                 <h4 class="nomargin">{{ $item['name'] }}</h4>
-                                             </div>
                                          </div>
                                      </td>
+                                     <td class="text-center">{{ $item['name'] }}</td>
                                      <td data-th="Price">${{ number_format($item['price'],0,',',',') }}</td>
-                                     <td class="text-center">{{ $item['size'] }}</td>
+                                     <td class="text-center">{{ $item['attribute'] }}</td>
                                      <td class="text-center">{{ $item['quantity'] }}</td>
                                      @php
                                          $total_price = $item['price'] * $item['quantity'];
@@ -58,34 +56,32 @@
                                  </tr>
                             @endforeach
                          
-
-     
                      </tbody>
                  </table>
                  {{-- box 3 : Hiển thị thông tin khách hàng --}}
-                 <div class="box_2 card">
+                 <div class="box_2 card form-group">
                      <h4>THÔNG TIN NHẬN HÀNG</h4>
-                         <div class="box">
+                         <div class="form-control">
                              {{-- <label for="id_khachhang"> Mã khách hàng : </label> --}}
                              <input type="text" value="{{ $user->id }}" name="id_khachhang" id="id_khachhang" readonly style="width: 100%" hidden>
                          </div>
-                         <div class="box">
+                         <div class="form-control">
                              <label for="ten_khachhang">Tên người nhận : </label>
                              <input type="text" value="{{ $user->name }}" name="ten_khachhang" id="ten_khachhang" style="width: 100%">
                          </div>
-                         <div class="box">
+                         <div class="form-control">
                              <label for="diachi_khachhang">Địa chỉ nhận hàng : </label>
                              <input type="text" value="{{ $user->address }}" name="diachi_khachhang" id="diachi_khachhang" style="width: 100%">
                          </div>
-                         <div class="box">
+                         <div class="form-control">
                              <label for="phone_khachhang">Số điện thoại nhận hàng : </label>
                              <input type="text" value="{{ $user->phone_number }}" name="phone_khachhang" id="phone_khachhang" style="width: 100%">
                          </div>
-                         <div class="box">
+                         <div class="form-control">
                              <label for="ghi_chu">Ghi chú : </label>
                              <input type="text" value="" name="ghi_chu" id="ghi_chu" style="width: 100%">
                          </div>
-                         <div class="box">
+                         <div class="form-control">
                              <label for="delivery_cost">Chi phí vận chuyển (Miễn phí khi giá trị đơn hàng từ 500,000 trở lên) : </label>
                              @php
                                  if ($total < 500000) {
@@ -97,7 +93,7 @@
                              @endphp
                              <span>{{ number_format($delivery_cost,0,',',',') }} VND</span>
                          </div>
-                         <div class="box danger" style="font-size:30px;">
+                         <div class="form-control danger" style="font-size:30px;">
                              {{-- @php
                                  $number = number_format($products->price*$quantity,',',0,0);
                              @endphp --}}
