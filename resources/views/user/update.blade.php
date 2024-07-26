@@ -36,9 +36,13 @@
             <div class="form-group mb-3">
                 <label for="province" class="form-label"><h6>Tỉnh/Thành phố :</h6></label>
                 <select name="province_code" id="province" class="form-select">
-                    <option value="{{ $province[0]["code"] }}">{{ $province[0]["name"] }}</option>
+                    @if (isset($province[0]))
+                        <option value="{{ $province[0]["code"] }}">{{ $province[0]["name"] }}</option>
+                    @else
+                        <option value=""> Chọn Tỉnh/Thành Phố </option>
+                    @endif
                     @foreach ($province_all as $item)
-                        <option value="{{ $item->code }}" {{ $users->province_code == $item->code ? 'selected' : '' }}>{{ $item->name }}</option>
+                        <option value="{{ $item->code }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -46,16 +50,20 @@
             <div class="form-group mb-3">
                 <label for="district" class="form-label"><h6>Quận/Huyện :</h6></label>
                 <select name="district_code" id="district" class="form-select">
-                    <option value="{{ $district[0]["code"] }}">{{ $district[0]['name'] }}</option>
+                    @if (isset($district[0]))
+                        <option value="{{ $district[0]["code"] }}">{{ $district[0]['name'] }}</option>
+                    @else
+                        <option value=""> Chọn Quận/Huyện </option>
+                    @endif
                 </select>
             </div>
 
-            <div class="form-group mb-3">
+            {{-- <div class="form-group mb-3">
                 <label for="ward" class="form-label"><h6>Phường/Xã :</h6></label>
                 <select name="ward_code" id="ward" class="form-select">
                     <option value="">Chọn Phường/Xã</option>
                 </select>
-            </div>
+            </div> --}}
 
             <div class="form-group mb-3">
                 <label for="address" class="form-label"><h6>Địa chỉ :</h6></label>
@@ -63,7 +71,7 @@
             </div>
 
             <div class="form-group d-flex justify-content-end">
-                <button type="button" onclick="goback()" class="btn btn-secondary">Trở lại</button>
+                {{-- <button type="button" onclick="goback()" class="btn btn-secondary">Trở lại</button> --}}
                 <button type="submit" class="btn btn-danger">Cập nhật thông tin</button>
             </div>
         </form>

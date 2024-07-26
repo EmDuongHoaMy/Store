@@ -15,11 +15,11 @@
                 <li class="nav-item me-2">
                     <form class="d-flex" role="search" action="{{ route('user.index') }}">
                         <input class="form-control " id="search" type="search" name="keyword" value="{{ $request->input('keyword') ?? old('keyword') }}" placeholder="Nhập từ khoá muốn tìm kiếm" aria-label="Search"style="width: 250px">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-success" type="submit" style="margin-left:10px">Search</button>
                       </form>
                 </li>
                 <li class="nav-item ">
-                    <a href="{{ route('user.add') }}" class="btn btn-success bg-danger"><i class="fa fa-plus"></i>Thêm mới thành viên</a>
+                    <a href="{{ route('user.add') }}" class="btn btn-danger"><i class="fa fa-plus"></i>Thêm mới thành viên</a>
                 </li>
             </ul>
         </nav>
@@ -30,10 +30,11 @@
                 <th>
                     <input type="checkbox" id="checkAll" class="input-checkbox">
                 </th>
+                <th style="width:50px">Mã thành viên</th>
                 <th>Họ tên</th>
                 <th>Email</th>
                 <th>Số điện thoại</th>
-                <th>Địa chỉ</th>
+                <th style="width:300px">Địa chỉ</th>
                 <th>Thao tác</th>
             </tr> 
             </th>
@@ -42,6 +43,7 @@
                 <td>
                     <input type="checkbox" class="input-checkbox checkBoxItem">
                 </td>
+                <td>{{ $item->id }}</td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->email }}</td>
                 <td>{{ $item->phone_number }}</td>

@@ -80,12 +80,12 @@
                             </select>
                         </div>
     
-                        <div class="col-md-4">
+                        {{-- <div class="col-md-4">
                             <label for="ward" class="form-label"><h6>Phường/Xã :</h6></label>
                             <select name="ward_code" id="ward" class="form-select">
                                 <option value="">Chọn Phường/Xã</option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
     
@@ -95,7 +95,7 @@
                 </div>
     
                 <div class="form-group d-flex justify-content-end">
-                    <button type="button" onclick="goback()" class="btn btn-secondary">Trở lại</button>
+                    {{-- <button type="button" onclick="goback()" class="btn btn-secondary">Trở lại</button> --}}
                     <button type="submit" class="btn btn-primary">Đăng ký</button>
                 </div>
             </form>

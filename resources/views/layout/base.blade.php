@@ -21,6 +21,7 @@
     {{-- CK-Editor CDN--}}
     <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
     {{-- Bonus script --}}
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     @yield('script')
 </head>
 <body>
@@ -28,6 +29,7 @@
     <div class="mt-5">
         @yield('main')
     </div>
+    @include('layout.footer')
     @yield('script-2')
 </body>
 </html>

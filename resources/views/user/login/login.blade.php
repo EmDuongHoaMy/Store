@@ -4,6 +4,7 @@
 @endsection
 @section('script')
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <script src="{{ asset('js/login.js') }}"></script>
 @endsection
 @section('user.main')
     <div class="main">
@@ -25,7 +26,9 @@
                         @endif
                     <input type="password" name="password" id="password" placeholder="Nhập password" class="form-control">
                 </div>
-            <button type="submit" class="btn btn-primary btn-block mt-3">Đăng nhập</button>
+                <div class=" form-group d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-block mt-3 ">Đăng nhập</button>
+                </div>
             </form>
         </div>
 

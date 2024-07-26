@@ -31,8 +31,7 @@ class StoreController extends Controller
 
     public function index(Request $request){
         $product = $this->productService->paginate($request);
-        $product_catalogue = ProductCatalogue::where('parent_id','=',1)
-        ->orWhere('parent_id','=',null)->get();
+        $product_catalogue = $this->productCatalogueService->getAll();
         return view('store.index',compact('product','request','product_catalogue'));
     }
 
@@ -40,8 +39,8 @@ class StoreController extends Controller
         $product = $this->productService->get($id);   
         $productCatalogue = $this->productCatalogueService->get($product->products_catalogue_id);
         $productAncestors = $this->productCatalogueService->getAncestors($productCatalogue->id);
-        $attribute_id = ProductAttribute::where("product_id","=",$id)->get();
-        $other = Product::where('products_catalogue_id','=',$product->products_catalogue_id)->paginate(4);
+        $attribute_id = $this->productService->getAttribute($id) ;
+        $other = Product::where('products_catalogue_id','!=',$product->products_catalogue_id)->paginate(5);
         return view('store.review',compact('product','other','productCatalogue','productAncestors','attribute_id'));
     }
 
@@ -56,6 +55,7 @@ class StoreController extends Controller
     }
 
     public function addToCart(Request $request){
+        $this->productService->storevalidate($request);
         $totalQuantity = $this->productService->addtocart($request);
         return response()->json(["cartCourt" => $totalQuantity]);
     }
@@ -68,13 +68,15 @@ class StoreController extends Controller
 
     public function index_by_catalogue(int $id,Request $request){
         $product = $this->productService->paginateByCatalogue($id);
-        $product_catalogue = ProductCatalogue::where('parent_id','=',1)
-        ->orWhere('parent_id','=',null)->get();
+        $product_catalogue = $this->productCatalogueService->getAll();
         return view('store.index',compact('product','request','product_catalogue'));
     }
 
     public function order(Request $request){
         $this->orderService->create($request);
+        foreach (session('cart') as $id => $value) {
+            $this->productService->delete_item($id);
+        }
         return back()->with('success',"Mua sản phẩm thành công");
     }
 }

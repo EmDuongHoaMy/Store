@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\OrderStatus;
 use App\Services\Interfaces\OrderServiceInterface;
 use App\Models\OrderItem;
 use App\Models\OrderPayment;
@@ -24,7 +25,7 @@ class OrderService implements OrderServiceInterface
     {
         $order = Order::create([
             "customer_id" => Auth::id(),
-            "current_status"=>"Chờ xử lý",
+            "current_status"=>OrderStatus::Pending,
         ]);
 
         if (session('cart')) {
@@ -84,8 +85,23 @@ class OrderService implements OrderServiceInterface
     }
 
     public function updateStatus($id,Request $request){
+        $status = $request->input('status');
+        $currnet_status = OrderStatus::Finish;
+        switch ($status) {
+            case OrderStatus::Pending->description():
+                $currnet_status = OrderStatus::Processing;
+                break;
+            case OrderStatus::Processing->description():
+                $currnet_status = OrderStatus::Delivering;    
+                break;
+            case OrderStatus::Delivering->description():
+                $currnet_status = OrderStatus::Completed;
+                break;
+            default:
+                break;
+        }
         $order = Order::find($id);
-        $order->current_status = $request->input('status');
+        $order->current_status = $currnet_status;
         $order->save();
     
         return $order->current_status;

@@ -23,6 +23,7 @@ class UserService implements UserServiceInterface
         else{
             $user = User::where('name', 'like', '%' . $keyword . '%')
             ->orWhere('email', 'like', '%' . $keyword . '%')
+            ->orWhere('id', 'like', '%' . $keyword . '%')
             ->orWhere('phone_number', 'like', '%' . $keyword . '%')
             ->paginate(30);
         }

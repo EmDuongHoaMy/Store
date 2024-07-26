@@ -14,6 +14,9 @@ class AttributeTableSeeder extends Seeder
     public function run(): void
     {
         Attribute::create([
+            "attribute_name"=>"Màu săc"
+        ]);
+        Attribute::create([
             "attribute_name"=>"Kích thước"
         ]);
     }

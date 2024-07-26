@@ -24,11 +24,11 @@
                 <th>
                     <input type="checkbox" id="checkAll" class="form-check-input">
                 </th>
-                <th>Tên sản phẩm</th>
-                <th>Mô tả</th>
-                <th>Giá sản phẩm (VNĐ)</th>
-                <th>Số lượng</th>
-                <th>Mã nhóm sản phẩm</th>
+                <th style="width:250px">Tên sản phẩm</th>
+                <th style="width:400px">Mô tả</th>
+                <th  style="width:100px">Giá sản phẩm (VNĐ)</th>
+                <th style="width:100px">Số lượng</th>
+                <th style="width:100px">Mã nhóm sản phẩm</th>
                 <th>Thao tác</th>
             </tr>
         </thead>

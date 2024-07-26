@@ -13,7 +13,7 @@
                       </form>
                 </li>
                 <li class="nav-item ">
-                    <a href="{{ route('usercatalogue.add') }}" class="btn btn-success bg-danger"><i class="fa fa-plus"></i>Thêm mới nhóm thành viên</a>
+                    <a href="{{ route('usercatalogue.add') }}" class="btn btn-danger"><i class="fa fa-plus"></i>Thêm mới nhóm thành viên</a>
                 </li>
             </ul>
         </nav>

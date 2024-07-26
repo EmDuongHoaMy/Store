@@ -30,6 +30,7 @@ Route::prefix('/user')->group(function(){
     Route::post('/create',[UserController::class,'create'])->name('user.create');
     Route::get('/edit/{id}',[UserController::class,'edit'])->middleware(AuthMiddleware::class)->name('user.edit');
     Route::post('/update/{id}',[UserController::class,'update'])->name('user.update');
+    Route::post('/user_update/{id}',[UserController::class,'userUpdate'])->name('user.user_update');
     Route::get('/delete/{id}',[UserController::class,'delete'])->middleware(AuthMiddleware::class)->name('user.delete');
     Route::post('/destroy/{id}',[UserController::class,'destroy'])->name('user.destroy');
     Route::get('/info',[UserController::class,'info'])->middleware(AuthMiddleware::class)->name('user.info');
@@ -84,4 +85,6 @@ Route::prefix('/order')->group(function(){
     Route::get('/index/detail/{id}',[OrderController::class,"detail"])->middleware(AuthMiddleware::class)->name("order.detail");
     Route::get('/ps_order',[OrderController::class,"psOrder"])->middleware(AuthMiddleware::class)->name("order.ps_order");
     Route::get('/updateStatus/{id}',[OrderController::class,"updateStatus"])->middleware(AuthMiddleware::class)->name("order.updateStatus");
+    Route::get('/own/detail/{id}',[OrderController::class,"ownDetail"])->middleware(AuthMiddleware::class)->name("order.own_detail");
+
 });

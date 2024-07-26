@@ -34,10 +34,10 @@
             $i = 1;
         @endphp
         <div class="holder ml-5" style="margin-left:50px">
-            <img src="{{ asset("$images[0]") }}" id="image-0" alt="" style="width:420px;height:480px;">
+            <img src="{{ $images?asset("$images[0]"):'N\A' }}" id="image-0" alt="" style="height:480px;width:400px">
             @foreach ($images as $item)
                 <div class="slides">
-                    <img src="{{ asset("$item") }}" alt="" style="width:420px;height:480px;">
+                    <img src="{{ asset("$item") }}" alt="" style="height:480px;width:400px">
                 </div>
                 @php
                     $i++;
@@ -47,13 +47,13 @@
                 @endphp
             @endforeach
         </div>
-        <div class="row text-center mt-2" style="margin-left:50px">
+        <div class="row text-center mt-2" style="margin-left:30px">
             @php
                 $i = 1;
             @endphp
             @foreach ($images as $item)
             <div class="column">
-                <img class="slide-thumbnail" src="{{ asset("$item") }}" onclick="currentSlide({{ $i }})" >
+                <img class="slide-thumbnail ml-5" src="{{ asset("$item") }}" onclick="currentSlide({{ $i }})" >
             </div>
             @php
                 $i++;
@@ -85,11 +85,11 @@
             <p class="text-danger fs-2">{{ $formattedValue }} VND</p>
             <form action="{{ route('store.pay',$product->id) }}" style="font-size:20px">
                 <div class="mt-3">
-                    <label for="attribute">Kích thước :</label>
+                    <label for="attribute">Lựa chọn thuộc tính sản phẩm(Kích thước - Màu sắc) :</label>
                     <select name="attribute" id="attribute" class="form-select">
-                        <option value="">Hãy chọn kích thước của bạn</option>
+                        <option value="">Hãy chọn thuộc tính sản phẩm </option>
                         @foreach ($attribute_id as $key=>$item)
-                            <option value="{{ $item['id'] }}">{{ $item->attribute_value }}</option>
+                            <option value="{{ $item['id'] }}">{{ $item['value'] }}</option>
                         @endforeach
                     </select>
                     {{-- Cảnh báo nếu chưa chọn size --}}
@@ -117,7 +117,7 @@
             </form>
         </div>
         {{-- khu vực 1.2.2 : hiển thị thông tin cửa hàng --}}
-        <div class=" text-exception card-body bg-secondary">
+        <div class=" text-exception card-body">
             <div class="mt-1">
                 <p> <i class="fa fa-archive"></i>  Nhận đặt hàng theo yêu cầu với số lượng lớn</p>
             </div>
@@ -144,17 +144,17 @@
 </div>
 {{-- khu vực 3 : hiển thị thêm các sản phẩm khác --}}
 <div>
-    <h3 class="text-center mt-3">Các sản phẩm tương tự  </h3>
-    <div class="row mt-5">
+    <h3 class="text-center mt-3 ">Các sản phẩm tương tự  </h3>
+    <div class="row pl-1 mt-3">
         @foreach ($other as $item)
-        <div class="card text-lg-center box" style="width:15rem">
+        <div class="card text-lg-center box nav-link ml-auto" style="width:250px;margin-left:30px">
             <a href="{{ route('store.review',$item->id) }}" class="text-decoration-none text-dark">
                 @php
                     $images = json_decode($item->images,true);
                 @endphp
-                <img src="{{ asset("$images[0]")}}" class="card-img-top card_image">
+                <img src="{{ $images ? asset("$images[0]") : 'N\A'}}" class="card-img-top card_image">
                 <div class="card-body">
-                    <p class="text-dark fs-5 multi-line-ellipsis">{{ $item->name }}</p>
+                    <p class="text-dark fs-6 multi-line-ellipsis">{{ $item->name }}</p>
                     @php
                     $formated_number = number_format($item->price,0,',',',');
                     @endphp

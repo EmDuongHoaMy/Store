@@ -5,9 +5,11 @@ namespace App\Services;
 // use App\Models\User;
 
 use App\Models\Attribute;
+use App\Models\AttributeValue;
 use App\Services\Interfaces\ProductServiceInterface;
 use App\Models\Product;
 use App\Models\ProductAttribute;
+use App\Models\ProductAttributeValue;
 use App\Models\ProductCatalogue;
 use Exception;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +30,9 @@ class ProductService implements ProductServiceInterface
             $product = Product::all();
         }
         else{
-            $product = Product::where('name', 'like', '%' . $keyword . '%')->get();
+            $product = Product::where('name', 'like', '%' . $keyword . '%')
+            ->orwhere('description', 'like', '%' . $keyword . '%')
+            ->get();
         }
         return $product;
     }
@@ -61,15 +65,24 @@ class ProductService implements ProductServiceInterface
        }catch(Exception $e){
         // dd($image);
         // dd(DB::getQueryLog());
-       }
+        dd($e->getMessage());
 
-       $sizes = $request->input("sizes");
-       $attribute_id = 1;
-       foreach ($sizes as $value){
-        ProductAttribute::create([
+       }
+       $atttribute = $request->input("attribute");
+       foreach ($atttribute as $value){
+        $product_attribute = ProductAttribute::create([
             'product_id' => $product->id,
-            'attribute_value' => $value['size'],
             'quantity' => $value['quantity']
+        ]);
+
+        ProductAttributeValue::create([
+            'product_attribute_id'=> $product_attribute->id,
+            'attribute_value_id' =>$value['size']
+        ]);
+
+        ProductAttributeValue::create([
+            'product_attribute_id'=> $product_attribute->id,
+            'attribute_value_id' =>$value['color']
         ]);
         $product['quantity'] += $value['quantity'];
        }
@@ -109,7 +122,6 @@ class ProductService implements ProductServiceInterface
     }
 
     public function addtocart(Request $request){
-        // $this->storevalidate($request);
         $productId = $request->input('id');
         $quantity = $request->input('quantity', 1);
         $attribute = $request->input('attribute');
@@ -192,5 +204,24 @@ class ProductService implements ProductServiceInterface
          }
 
         return $image; 
+    }
+
+    public function getAttribute($product_id){
+        $arr = [];
+        $product_attribute = ProductAttribute::where('product_id','=',$product_id)->get();
+        foreach ($product_attribute as $item) {
+            $arr_2 = [];
+            $arr_2['id'] = $item['id'];
+            $value = "";
+            $attribute = ProductAttributeValue::where('product_attribute_id','=',$item['id'])->get();
+            foreach ($attribute as $attr_value) {
+                $find = AttributeValue::find($attr_value['attribute_value_id']);
+                $value .= $find['attribute_value'];
+                $value .= " ";
+            }
+            $arr_2['value'] = $value;
+            $arr[] = $arr_2;
+        }
+        return $arr;
     }
 }

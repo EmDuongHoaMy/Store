@@ -52,7 +52,7 @@
 
                         <div class="form-group mb-3">
                             <label for="quantity" class="form-label"><h6>Nhập số lượng sản phẩm :</h6></label>
-                            <input type="number" name="quantity" id="quantity" class="form-control" value="{{ $product->quantity }}" min="0" max="100">
+                            <input type="number" name="quantity" id="quantity" class="form-control" value="{{ $product->quantity }}" min="0">
                         </div>
 
                         <div class="mb-3">
@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="mb-3 justify-content-end">
-                            <button type="button" onclick="goback()" class="btn btn-primary">Trở lại</button>
+                            {{-- <button type="button" onclick="goback()" class="btn btn-primary">Trở lại</button> --}}
                             <button type="submit" class="btn btn-danger">Cập nhật thông tin</button>
                         </div>
                     </form>

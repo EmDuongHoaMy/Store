@@ -92,6 +92,11 @@ class UserController extends Controller
         return redirect(route('user.index'))->with('success','Cập nhật thông tin thành công');
     }
 
+    public function userUpdate($id,Request $request){
+        $this->userService->update($id,$request);
+        return back()->with('success','Cập nhật thông tin thành công');
+    }
+
     public function delete($id){
         $users = $this->userService->get($id);
         return view('user.destroy',compact('users'));

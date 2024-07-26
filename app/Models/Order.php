@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,10 @@ class Order extends Model
     protected $fillable = [
         "customer_id",
         "current_status",
+    ];
+
+    protected $casts = [
+        "current_status" => OrderStatus::class,
     ];
 
     public function customer(){

@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="padding-left:2% ">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="padding-left:1% ">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ route('home') }}"><i class="fa-solid fa-house"> </i> HOME</a>
+      <a class="navbar-brand" href="{{ route('home') }}"><i class="fa-solid fa-house"> </i> DMStore</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -9,13 +9,27 @@
           @auth
               @if (Auth::user()['user_catalogues_id']==1)
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('user.index') }}"><i class="fa-solid fa-money-check" > </i> MANAGER</a>
+                <a class="nav-link" href="{{ route('user.index') }}"><i class="fa-solid fa-money-check" > </i> Quản lý</a>
               </li>
               @endif
           @endauth
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('store.index') }}"><i class="fa-solid fa-store"> </i> STORE</a>
+            <a class="nav-link" href="{{ route('store.index') }}"><i class="fa-solid fa-store"> </i> Sản phẩm</a>
+          </li>
+
+          <li class="nav-item">
+            <div class="dropdown">
+              <a class="btn dropdown-toggle nav-link" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-phone"></i> Liên hệ
+              </a>
+            
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
           </li>
 
         </ul>
@@ -37,8 +51,8 @@
           @endif
 
           <div class="dropdown" style="margin-right:10px">
-            <a class="btn btn-outline-secondary" href="{{ route('store.cart') }}">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge text-bg-danger" id="cart-quantity">{{ $totalQuantity }}</span>
+            <a class="btn btn-outline-danger" href="{{ route('store.cart') }}">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng <span class=" text-bg-danger" id="cart-quantity">{{ $totalQuantity }}</span>
            </a>
           </div>
 
@@ -47,10 +61,10 @@
               Xin chào , {{ Auth::user()['name'] }} 
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li ><button type="button" class="btn"><a href="{{ route('user.info') }}" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-user me-2"></i> Tài khoản</a></button></li>
-              <li ><button type="button" class="btn"><a href="{{ route('order.ps_order') }}" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-regular fa-star me-2"></i> Đơn hàng </a></button></li>
-              <li ><button type="button" class="btn"><a href="#" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-gear"></i> Cài đặt</a></button></li>
-              <li ><button type="button" class="btn"><a href="{{ route('user.logout') }}" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></button></li>
+              <li ><button type="button" class="btn dropdown-item"><a href="{{ route('user.info') }}" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-user me-2"></i> Tài khoản</a></button></li>
+              <li ><button type="button" class="btn dropdown-item"><a href="{{ route('order.ps_order') }}" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-regular fa-star me-2"></i> Đơn hàng </a></button></li>
+              <li ><button type="button" class="btn dropdown-item"><a href="#" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-gear"></i> Cài đặt</a></button></li>
+              <li ><button type="button" class="btn dropdown-item"><a href="{{ route('user.logout') }}" class="nav-item text-dark" style="text-decoration-line: none"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></button></li>
             </ul>
           </div>
           

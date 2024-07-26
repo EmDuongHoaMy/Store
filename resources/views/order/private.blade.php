@@ -2,6 +2,9 @@
 @section('title')
     MyOrders
 @endsection
+@section('script')
+    <script src="{{ asset('js/login.js') }}"></script>
+@endsection
 @section('main')
 <div class="ibox-content m-5">
     <h2 class="text-center mb-4">Đơn hàng của bạn</h2>
@@ -23,7 +26,7 @@
                     <td>{{ $item->current_status }}</td>
                     <td>{{ $item['created_at'] }}</td>
                     <td>
-                        <a href="{{ route('order.detail',$item->id) }}" class="btn btn-success"><i class="fa-solid fa-circle-info"></i></a>
+                        <a href="{{ route('order.own_detail',$item->id) }}" class="btn btn-success"><i class="fa-solid fa-circle-info"></i></a>
                     </td>
                 </tr>
                 @endforeach

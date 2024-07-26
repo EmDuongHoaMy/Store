@@ -76,12 +76,12 @@
                     </select>
                 </div>
         
-                <div class="ms-3" style="flex: 1;">
+                {{-- <div class="ms-3" style="flex: 1;">
                     <label for="ward" class="form-label"><h6>Phường/Xã :</h6></label>
                     <select name="ward_code" id="ward" class="form-control">
                         <option value="">Chọn Phường/Xã</option>
                     </select>
-                </div>
+                </div> --}}
             </div>
 
             <div class="mb-3">
@@ -89,9 +89,8 @@
                 <input type="text" name="address" id="address" placeholder="Nhập Địa chỉ" class="form-control">
             </div>
 
-            <div class="mb-3">
-                <button type="button" onclick="goback()" class="btn btn-success">Trở lại</button>
-                <button type="submit" class="btn btn-primary">Đăng ký</button>
+            <div class="form-group d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Đăng ký tài khoản</button>
             </div>
         </form>
     </div>

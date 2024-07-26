@@ -39,7 +39,7 @@
                         @endif
 
                         <div class="mb-3 justify-content-end">
-                            <button type="button" onclick="goback()" class="btn btn-primary">Trở lại</button>
+                            {{-- <button type="button" onclick="goback()" class="btn btn-primary">Trở lại</button> --}}
                             <button type="submit" class="btn btn-danger">Xóa nhóm sản phẩm</button>
                         </div>
                     </form>

@@ -47,36 +47,44 @@
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="sizes" class="form-label"><h6>Kích thước và số lượng</h6></label>
-                    <div id="sizes">
-                        <div class="row mb-2">
-                            <div class="col">
-                                <select name="sizes[0][size]" id="" class="form-control">
+                    <label for="attribute" class="form-label"><h6>Chọn chi tiết cho sản phẩm</h6></label>
+                    <div id="attribute">
+                        <div class="col mb-2">
+                            <div class="d-flex">
+                                <select name="attribute[0][size]" id="" class="form-control">
                                     <option value="">Chọn kích thước</option>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
+                                    <option value="1">S</option>
+                                    <option value="2">M</option>
+                                    <option value="3">L</option>
+                                    <option value="4">XL</option>
                                 </select>
+
+                                <select name="attribute[0][color]" id="" class="form-control">
+                                    <option value="">Chọn màu săc</option>
+                                    <option value="5">Xanh</option>
+                                    <option value="6">Đỏ</option>
+                                    <option value="7">Vàng</option>
+                                </select>
+
+                                <input type="number" class="form-control" name="attribute[0][quantity]" placeholder="Quantity" required>
+
                             </div>
-                            <div class="col">
-                                <input type="number" class="form-control" name="sizes[0][quantity]" placeholder="Quantity" required>
-                            </div>
+                           
                         </div>
                     </div>
-                    <button type="button" class="btn btn-secondary" onclick="addColor()">Chọn thêm kích thước</button>
+                    <button type="button" class="btn btn-secondary" onclick="addColor()">Chọn thêm mẫu sản phẩm</button>
                 </div>
     
                 <div class="form-group mb-3">
                     <label for="price" class="form-label"><h6>Nhập giá sản phẩm (VNĐ) :</h6></label>
-                    <input type="text" name="price" id="price" placeholder="Nhập giá sản phẩm" class="form-control @error('price') is-invalid @enderror">
+                    <input type="number" name="price" id="price" placeholder="Nhập giá sản phẩm" class="form-control @error('price') is-invalid @enderror">
                     @if ($errors->has('price'))
                         <span class="text-danger">{{ $errors->first('price') }}</span>
                     @endif
                 </div>
     
                 <div class="form-group d-flex justify-content-end">
-                    <button type="button" onclick="goback()" class="btn btn-secondary">Trở lại</button>
+                    {{-- <button type="button" onclick="goback()" class="btn btn-secondary">Trở lại</button> --}}
                     <button type="submit" class="btn btn-primary">Đăng ký sản phẩm</button>
                 </div>
             </form>

@@ -1,7 +1,8 @@
 
     .box{
         margin: 10px;
-        width: 20rem;
+        width:250px;
+        margin-left:30px
     }
 
     .box_1{
@@ -19,7 +20,7 @@
     .box_1_2{
         width:55%;
         height:100%;
-        padding: 4%;
+        padding: 22px;
     }
 
     .box_1_2_1{
@@ -68,3 +69,9 @@
         /* padding: 2px; Thêm khoảng cách bên trong để dễ nhìn thấy */
         /* width: 200px; Đặt độ rộng cố định hoặc tối đa cho phần tử */
     }
+
+    .box:hover{
+        border: groove rgb(191, 85, 9) 5px;
+    }
+
+    

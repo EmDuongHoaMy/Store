@@ -21,4 +21,5 @@ interface ProductServiceInterface
     public function delete_item(string $id);
     public function paginateByCatalogue(int $id);
     public function getImageUrl(Request $request);
+    public function getAttribute($product_id);
 }

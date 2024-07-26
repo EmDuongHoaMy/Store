@@ -31,7 +31,13 @@ class OrderController extends Controller
     }
 
     public function updateStatus($id,Request $request){
-        $result = $this->orderService->updateStatus($id,$request);
+        $key = $this->orderService->updateStatus($id,$request);
+        $result = $key->description();
         return response()->json(['status'=> $result]);
+    }
+
+    public function ownDetail($id){
+        $detail = $this->orderService->detail($id);
+        return view('order.own',compact('detail'));
     }
 }

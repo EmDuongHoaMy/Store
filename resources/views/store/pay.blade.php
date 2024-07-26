@@ -2,6 +2,7 @@
 @section('script')
     <link rel="stylesheet" href="{{ asset('css/store/pay') }}">
     <script src="{{ asset('js/goback.js') }}"></script>
+    <script src="{{ asset('js/login.js') }}"></script>
 @endsection
 @section('store.main')
 @if (session('cart'))
@@ -17,11 +18,11 @@
                      <thead>
                          <tr>
                              <th></th>
-                             <th>Product</th>
-                             <th>Price</th>
-                             <th>Size</th>
+                             <th style="width:800px">Product</th>
+                             <th style="width:120px">Price</th>
+                             <th style="width:150px">Attr(Size-Color)</th>
                              <th>Quantity</th>
-                             <th>Total</th>
+                             <th style="width:150px">Total</th>
                              <th></th>
                          </tr>
                      </thead>
@@ -30,19 +31,30 @@
                               $total_quantity = 0   ;
                          @endphp
                          
-                            @foreach(session('cart') as $id => $item)
+                        @foreach(session('cart') as $id => $item)
                                  <tr rowId="{{ $id }}">
                                      <td data-th="Product">
                                          <div class="row">
                                              @php
                                                 $images = json_decode($item['images'], true);
                                             @endphp
-                                             <div class="col-sm-3 hidden-xs"><a href="{{ route('store.review',$item['product_id']) }}"><img src="{{ isset($images) ? asset("$images[0]") : 'N/A' }}" class="card-img-top"/></a></div>
+                                             <div class="col-sm-3 hidden-xs text-center" style="width:200px "><a href="{{ route('store.review',$item['product_id']) }}"><img src="{{ isset($images) ? asset("$images[0]") : 'N/A' }}" class="card-img-top" style="width:100px;height:150px;"/></a></div>
                                          </div>
                                      </td>
                                      <td class="text-center">{{ $item['name'] }}</td>
                                      <td data-th="Price">${{ number_format($item['price'],0,',',',') }}</td>
-                                     <td class="text-center">{{ $item['attribute'] }}</td>
+                                     @php
+                                    $attribute = \App\Models\ProductAttribute::find($item['attribute']);
+                                    // dd($attribute);
+                                    $value = "";
+                                    $product_attribute = \App\Models\ProductAttributeValue::where('product_attribute_id','=',$attribute['id'])->get();
+                                    foreach ($product_attribute as $attr_value) {
+                                    $find = \App\Models\AttributeValue::find($attr_value['attribute_value_id']);
+                                    $value .= $find['attribute_value'];
+                                    $value .= " ";
+                                    }
+                                    @endphp
+                                     <td class="text-center">{{ $value }}</td>
                                      <td class="text-center">{{ $item['quantity'] }}</td>
                                      @php
                                          $total_price = $item['price'] * $item['quantity'];
@@ -54,7 +66,16 @@
                                          <a class="btn btn-outline-danger btn-sm delete-item" href="{{ route('store.deleteitem',$id) }}">Delete</a>
                                      </td>
                                  </tr>
-                            @endforeach
+                        @endforeach
+                        <tr>
+                            <th>Total</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <th>${{ number_format($total,0,',',',') }}</th>
+                            <td></td>
+                        </tr>
                          
                      </tbody>
                  </table>

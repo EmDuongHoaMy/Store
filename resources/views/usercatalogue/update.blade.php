@@ -26,7 +26,7 @@
             </div>
 
             <div class="form-group d-flex justify-content-end">
-                <button type="button" onclick="goback()" class="btn btn-secondary">Trở lại</button>
+                {{-- <button type="button" onclick="goback()" class="btn btn-secondary">Trở lại</button> --}}
                 <button type="submit" class="btn btn-danger">Cập nhật thông tin</button>
             </div>
         </form>
