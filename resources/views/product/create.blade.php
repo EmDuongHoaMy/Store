@@ -3,7 +3,8 @@
     <link rel="stylesheet" href="{{ asset('css/sign.css') }}">
     <script src="{{ asset('js/goback.js') }}"></script>
     <script src="{{ asset('js/getdesofcata.js') }}"></script>
-    <script src="{{ asset('js/sizeQuantity.js') }}"></script>
+    <script src="{{ asset('js/addAttrButton.js') }}"></script>
+    <script src="{{ asset('js/select.js') }}"></script>
 @endsection
 @section('product.main')
 
@@ -47,32 +48,22 @@
                 </div>
 
                 <div class="form-group mb-3">
+                    <label for="" class="form-label"><h6>Chọn chi tiết cho sản phẩm</h6></label>
+                    <div class="" role="group" aria-label="Basic checkbox toggle button group">
+                        @foreach ($attribute as $item)
+                            <input type="checkbox" class="btn-check" id="btncheck{{ $item->id }}" name="option[{{ $item->id }}]" value="{{ $item->id }}" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="btncheck{{ $item->id }}">{{ $item->attribute_name }}</label>
+                        @endforeach
+                      </div>
+                    <button type="button" class="btn btn-secondary mt-2" onclick="addAttr()">Xác nhận thuộc tính sản phẩm</button>
+                </div>
+
+                <div class="form-group mb-3">
                     <label for="attribute" class="form-label"><h6>Chọn chi tiết cho sản phẩm</h6></label>
+              
                     <div id="attribute">
-                        <div class="col mb-2">
-                            <div class="d-flex">
-                                <select name="attribute[0][size]" id="" class="form-control">
-                                    <option value="">Chọn kích thước</option>
-                                    <option value="1">S</option>
-                                    <option value="2">M</option>
-                                    <option value="3">L</option>
-                                    <option value="4">XL</option>
-                                </select>
-
-                                <select name="attribute[0][color]" id="" class="form-control">
-                                    <option value="">Chọn màu săc</option>
-                                    <option value="5">Xanh</option>
-                                    <option value="6">Đỏ</option>
-                                    <option value="7">Vàng</option>
-                                </select>
-
-                                <input type="number" class="form-control" name="attribute[0][quantity]" placeholder="Quantity" required>
-
-                            </div>
-                           
-                        </div>
+                        
                     </div>
-                    <button type="button" class="btn btn-secondary" onclick="addColor()">Chọn thêm mẫu sản phẩm</button>
                 </div>
     
                 <div class="form-group mb-3">

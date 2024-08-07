@@ -41,12 +41,7 @@ class ProductCatalogueService implements ProductCatalogueServiceInterface
     }
 
     public function create(Request $request){
-        // ProductCatalogue::create([
-        //     'name'=>$request->input('name'),
-        //     'description'=>$request->input('description'),
-        //     'parent_id'=>$request->input('parent_id'),
-        //     'user_id'  =>Auth::id()
-        // ]);
+        
         DB::beginTransaction();
 
         try {

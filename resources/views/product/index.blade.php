@@ -24,8 +24,8 @@
                 <th>
                     <input type="checkbox" id="checkAll" class="form-check-input">
                 </th>
+                <th style="width:200px">Hình ảnh</th>
                 <th style="width:250px">Tên sản phẩm</th>
-                <th style="width:400px">Mô tả</th>
                 <th  style="width:100px">Giá sản phẩm (VNĐ)</th>
                 <th style="width:100px">Số lượng</th>
                 <th style="width:100px">Mã nhóm sản phẩm</th>
@@ -38,8 +38,11 @@
                 <td>
                     <input type="checkbox" class="form-check-input checkBoxItem">
                 </td>
+                @php
+                $images = json_decode($item['images'], true);
+                @endphp
+                <td><img src="{{ $images ? asset("$images[0]") : 'N/A'}}" class="card-img-top" style="height:300px" alt="..."></td>
                 <td>{{ $item->name }}</td>
-                <td>{{ $item->description }}</td>
                 @php
                     $price = number_format($item->price, 0, 0, ',');
                 @endphp
@@ -55,6 +58,4 @@
         </tbody>
     </table>
 </div>
-
-
 @endsection

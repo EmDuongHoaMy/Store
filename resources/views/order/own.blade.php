@@ -35,7 +35,7 @@
                     <td>{{ $item->product_quantity }}</td>
                     @php
                         $price = number_format($item->product_price,0,',',',');
-                        $total += $item->product_price * $item->product_quantity ;
+                        $total += $item->product_price;
                     @endphp
                     <td>{{ $price }}</td>
                 </tr>

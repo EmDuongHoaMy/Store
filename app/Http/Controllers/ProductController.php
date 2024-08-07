@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attribute;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductCatalogue;
@@ -29,7 +30,8 @@ class ProductController extends Controller
 
     public function add(){
         $productcatalogue_all = $this->productCatalogueService->getAll();
-        return view('product.create',compact('productcatalogue_all'));
+        $attribute = Attribute::all();
+        return view('product.create',compact('productcatalogue_all','attribute'));
     }
 
     public function create(Request $request){

@@ -18,8 +18,12 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'images' => 'array', // Automatically cast JSON to array and vice versa
+        'images' => 'array',
     ];
+
+    public function productCatalogue(){
+        return $this->belongsTo(ProductCatalogue::class);
+    }
 
     public function attributes(){
         return $this->hasMany(ProductAttribute::class);

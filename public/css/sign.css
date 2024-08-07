@@ -24,3 +24,20 @@
     display: block;
     margin-top: 10px;
 }
+.size-selector {
+    display: flex;
+    gap: 10px;
+}
+
+.size-button {
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.size-button.selected {
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+}

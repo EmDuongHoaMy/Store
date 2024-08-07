@@ -13,14 +13,15 @@
 </div>
 {{-- Danh sách sản phẩm --}}
 <h3 style="margin:10px;text-align:center;margin-top:35px;color:brown ">GỢI Ý HÔM NAY</h3>
-<div class="row mt-5" style="margin-left:10px" >
+<div class="row p-0 mt-5" style="margin-left:70px;margin-right:10px" >
     @foreach ($product as $item)
-    <div class="card text-lg-center box nav-link ml-auto" style="width:250px">
+    <div class="card text-lg-center box nav-link ml-auto p-0" style="width:225px">
         <a href="{{ route('store.review',$item->id) }}" class="text-decoration-none">
             @php
                 $images = json_decode($item->images,true);
             @endphp
-            <img src="{{ $images[0]}}" class="card-img-top card_image" alt="...">
+            <img src="{{($images)?$images[0]:"N\A"}}" class="card-img-top card_image" alt="...">
+            <img src="{{($images)?$images[1]:"N\A"}}" class="card-img-top card_image_2" alt="...">
             <div class="card-body" >
                 <p class="text-dark fs-6 multi-line-ellipsis">{{ $item->name }}</p>
                 @php

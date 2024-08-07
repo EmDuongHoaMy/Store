@@ -1,7 +1,7 @@
 @extends('cart.bg')
 @section('script')
 <script src="{{ asset('js/goback.js') }}"></script>
-<script src="{{ asset('js/login.js') }}"></script>
+{{-- <script src="{{ asset('js/login.js') }}"></script> --}}
 @endsection
 @section('cart.main')
 <div class="text-center box_1">
@@ -13,7 +13,7 @@
             <th></th>
             <th style="width:800px">Product</th>
             <th style="width:120px">Price</th>
-            <th style="width:150px">Attr(Size-Color)</th>
+            <th style="width:150px">Attr</th>
             <th>Quantity</th>
             <th style="width:140px">Total</th>
             <th></th>

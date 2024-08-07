@@ -3,9 +3,9 @@
     <link rel="stylesheet" href="{{ asset('css/store/index.css') }}">
 @endsection
 @section('store.main')
-<div class="ibox-content ">
+<div class="ibox-content ml-0 ">
     {{-- Danh sách nhóm sản phẩm --}}
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark mt-3">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
         <ul class="navbar-nav">
             @foreach ($product_catalogue as $item)
@@ -31,15 +31,16 @@
 </div>
 
 {{-- Danh sách sản phẩm --}}
-<div class="row pl-1">
+<div class="row pl-1 p-0" style="margin-left:50px">
     @foreach ($product as $id =>$item)
 
-    <div class="card text-lg-center box nav-link ml-auto" style="width:250px">
+    <div class="card text-lg-center box nav-link ml-auto p-0" style="width:225px">
         <a href="{{ route('store.review',$item['id']) }}" class="text-decoration-none text dark">
             @php
                 $images = json_decode($item['images'], true);
             @endphp
             <img src="{{ $images ? asset("$images[0]") : 'N/A'}}" class="card-img-top card_image" alt="...">
+            <img src="{{ $images ? asset("$images[1]") : 'N/A'}}" class="card-img-top card_image_2" alt="...">
             <div class="card-body" style="text-decoration:none" >
                 <p class="text-dark fs-6 multi-line-ellipsis">{{ $item['name'] }}</p>
                 @if ($item['quantity'])

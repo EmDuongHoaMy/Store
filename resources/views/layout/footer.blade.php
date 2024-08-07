@@ -12,8 +12,8 @@
                 <h5>HỖ TRỢ KHÁCH HÀNG</h5>
                 <ul class="list-unstyled ">
                     <li><a href="#" class="text-white text-decoration-none">Giới thiệu</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">Chính thức hỗ trợ</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">Chính thức đổi trả</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Chính sách hỗ trợ</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Chính sách đổi trả</a></li>
                 </ul>
             </div>
             <div class="col-md-3">

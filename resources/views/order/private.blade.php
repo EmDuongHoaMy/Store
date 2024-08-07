@@ -23,7 +23,7 @@
                 @foreach ($order as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
-                    <td>{{ $item->current_status }}</td>
+                    <td>{{ $item->current_status->description() }}</td>
                     <td>{{ $item['created_at'] }}</td>
                     <td>
                         <a href="{{ route('order.own_detail',$item->id) }}" class="btn btn-success"><i class="fa-solid fa-circle-info"></i></a>

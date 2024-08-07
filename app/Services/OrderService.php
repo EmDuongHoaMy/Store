@@ -56,7 +56,7 @@ class OrderService implements OrderServiceInterface
 
         OrderPayment::create([
             "order_id" => $order->id,
-            "payment_method" => "Thanh toán trực tiếp",
+            "payment_method" => $request->input('payment_method'),
             "amount" => $amount
         ]);
     }

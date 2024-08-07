@@ -32,6 +32,7 @@
                     @php
                         $price = number_format($item->product_price,0,',',',');
                         $total += $item->product_price ;
+                        // dd($total);
                     @endphp
                     <td>{{ $price }}</td>
                 </tr>

@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="padding-left:1% ">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ route('home') }}"><i class="fa-solid fa-house"> </i> DMStore</a>
+      <a class="navbar-brand" style="padding-left:10px" href="{{ route('home') }}"><i class="fa-solid fa-house"> </i> DMStore</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -25,7 +25,7 @@
               </a>
             
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="#"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
+                <li><a class="dropdown-item" href="https://www.facebook.com/duongxo37"><i class="fa-brands fa-facebook"></i> Facebook</a></li>
                 <li><a class="dropdown-item" href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
@@ -45,7 +45,7 @@
           @if (session('cart'))
               @foreach (session('cart') as $item)
                   @php
-                      $totalQuantity += $item['quantity'];
+                      $totalQuantity += 1;
                   @endphp
               @endforeach
           @endif
@@ -54,6 +54,29 @@
             <a class="btn btn-outline-danger" href="{{ route('store.cart') }}">
               <i class="fa fa-shopping-cart" aria-hidden="true"></i> Giỏ hàng <span class=" text-bg-danger" id="cart-quantity">{{ $totalQuantity }}</span>
            </a>
+           <ul class="dropdown-menu" aria-labelledby="aria-labelledby">
+            @if (session('cart'))
+              @foreach (session('cart') as $item)
+                  <li>
+                    <div class="d-flex m-1">
+                      <div id="image_frame">
+                        @php
+                          $images = json_decode($item['images'], true);
+                        @endphp
+                          <a href="{{ route('store.review',$item['product_id']) }}"><img src="{{ isset($images) ? asset("$images[0]") : 'N/A' }}"  class="card-img-top" style="width:60px;height:90px;" /></a>
+                      </div>
+
+                      <div id="info_frame" style="width:280px">
+                        <span>{{ $item['name'] }}</span>
+                      </div>
+                    </div>
+                  </li>
+              @endforeach  
+            @else
+            <img src="{{ asset('images/empty-cart.webp') }}" alt="" srcset="" style="width:100%;height:100%;">
+            {{-- <span class="justify-center">Không có sản phẩm trong giỏ hàng</span> --}}
+            @endif
+           </ul>
           </div>
 
           <div class="dropdown">

@@ -4,15 +4,21 @@
     
 }
 .home{
-    width: 1050px;
-    height: 600px;
+    width: 100%;
+    height: 620px;
+    padding: 0px 10px;
 }
 .card_text{
     text-decoration: none;
 }
 .card_image{
-    width: 200px;
-    height: 260px;
+    width: 100%;
+    height: 280px;
+}
+.card_image_2{
+    width: 100%;
+    height: 280px;
+    display: none;
 }
 .multi-line-ellipsis {
     display: -webkit-box;
@@ -22,5 +28,11 @@
     text-overflow: ellipsis;
 }
 .box:hover{
-    border: groove rgb(191, 85, 9) 5px;
+    border: groove rgba(119, 37, 9, 0.3) 2px;
+}
+.box:hover .card_image{
+    display:none;
+}
+.box:hover .card_image_2{
+    display:block;
 }

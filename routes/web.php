@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -17,6 +18,7 @@ Route::get('/',[HomeController::class,'home'])->name('home');
 Route::get('/ajax/location/district/',[LocationController::class,'getDistrict']);
 Route::get('/ajax/location/ward/',[LocationController::class,'getWard']);
 Route::get('/ajax/getdoc/',[ProductCatalogueController::class,'getDescription']);
+Route::get('/ajax/addAttrButton/',[AttributeController::class,'addAttribute']);
 Route::get('/ajax/complete_search/',[TestController::class,'searchAutocomplete']);
 
 Route::prefix('/user')->group(function(){
@@ -54,6 +56,17 @@ Route::prefix('/products')->group(function(){
     Route::post('/update/{id}',[ProductController::class,'update'])->name('product.update');
     Route::get('/delete/{id}',[ProductController::class,'delete'])->middleware(AuthMiddleware::class)->name('product.delete');
     Route::post('/destroy/{id}',[ProductController::class,'destroy'])->name('product.destroy');
+});
+
+Route::prefix('/attribute')->middleware(AuthMiddleware::class)->group(function(){
+    Route::get('/index',[AttributeController::class,'index'])->name('attribute.index');
+    Route::get('/add',[AttributeController::class,'add'])->name('attribute.add');
+    Route::post('/create',[AttributeController::class,'create'])->name('attribute.create');
+    Route::get('/value/index',[AttributeController::class,'valueIndex'])->name('attribute_value.index');
+    Route::get('/value/add',[AttributeController::class,'valueAdd'])->name('attribute_value.add');
+    Route::post('/value/create',[AttributeController::class,'valueCreate'])->name('attribute_value.create');
+
+
 });
 
 Route::prefix('/products_catalogue')->group(function(){

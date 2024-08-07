@@ -10,7 +10,7 @@
 {{-- Danh sách thư mục --}}
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-    <ul class="navbar-nav" style="padding-left:2% ">
+    <ul class="navbar-nav">
         @foreach ($productAncestors as $item)
         <li class="nav-item">
             <a class="nav-link" href="{{ route('store.index_by_catalogue',$item->id) }}"><span>{{ $item->name }}   /</span></a>
@@ -82,22 +82,17 @@
             @php
                 $formattedValue = number_format($product->price,0,',', ',');
             @endphp
-            <p class="text-danger fs-2">{{ $formattedValue }} VND</p>
+            <p class="text-danger fs-2" style="margin-top: 1rem">{{ $formattedValue }} VND</p>
             <form action="{{ route('store.pay',$product->id) }}" style="font-size:20px">
                 <div class="mt-3">
-                    <label for="attribute">Lựa chọn thuộc tính sản phẩm(Kích thước - Màu sắc) :</label>
+                    <label for="attribute">Lựa chọn thuộc tính sản phẩm:</label>
                     <select name="attribute" id="attribute" class="form-select">
                         <option value="">Hãy chọn thuộc tính sản phẩm </option>
                         @foreach ($attribute_id as $key=>$item)
                             <option value="{{ $item['id'] }}">{{ $item['value'] }}</option>
                         @endforeach
                     </select>
-                    {{-- Cảnh báo nếu chưa chọn size --}}
-                    <span>
-                        @if ($errors->has('size'))
-                        <span class="text-danger">* {{ $errors->first('size') }}</span>
-                        @endif
-                    </span>
+                    <span id="attributeError" class="text-danger mt-3"></span>
                 </div>
                 <div class="mt-3 d-flex">
                     <label for="quantity">Số lượng : </label>
@@ -145,14 +140,15 @@
 {{-- khu vực 3 : hiển thị thêm các sản phẩm khác --}}
 <div>
     <h3 class="text-center mt-3 ">Các sản phẩm tương tự  </h3>
-    <div class="row pl-1 mt-3">
+    <div class="row pl-1 mt-3 p-0">
         @foreach ($other as $item)
-        <div class="card text-lg-center box nav-link ml-auto" style="width:250px;margin-left:30px">
+        <div class="card text-lg-center box nav-link ml-auto p-0" style="width:250px;margin-left:30px">
             <a href="{{ route('store.review',$item->id) }}" class="text-decoration-none text-dark">
                 @php
                     $images = json_decode($item->images,true);
                 @endphp
                 <img src="{{ $images ? asset("$images[0]") : 'N\A'}}" class="card-img-top card_image">
+                <img src="{{ $images ? asset("$images[1]") : 'N\A'}}" class="card-img-top card_image_2">
                 <div class="card-body">
                     <p class="text-dark fs-6 multi-line-ellipsis">{{ $item->name }}</p>
                     @php

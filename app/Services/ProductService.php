@@ -43,7 +43,8 @@ class ProductService implements ProductServiceInterface
         'description'=>'required',
         'price' =>'required'
 
-        ],[
+        ]
+        ,[
         'name.required'=>'Tên sản phẩm không được để trống',
         'description'=>'Mô tả sản phẩm không được để trống',
         'price' => 'Giá sản phẩm không thể để trống'
@@ -63,27 +64,24 @@ class ProductService implements ProductServiceInterface
             'images'=>json_encode($image)
         ]);
        }catch(Exception $e){
-        // dd($image);
-        // dd(DB::getQueryLog());
         dd($e->getMessage());
 
        }
-       $atttribute = $request->input("attribute");
-       foreach ($atttribute as $value){
+       $attribute = $request->input("attribute");
+       
+       foreach ($attribute as $key => $value){
         $product_attribute = ProductAttribute::create([
             'product_id' => $product->id,
             'quantity' => $value['quantity']
         ]);
+        $value_collect = collect($value)->except('quantity');
+        foreach ($value_collect as $key => $item) {
+            ProductAttributeValue::create([
+                'product_attribute_id'=> $product_attribute->id,
+                'attribute_value_id' =>$item
+            ]);
+            }
 
-        ProductAttributeValue::create([
-            'product_attribute_id'=> $product_attribute->id,
-            'attribute_value_id' =>$value['size']
-        ]);
-
-        ProductAttributeValue::create([
-            'product_attribute_id'=> $product_attribute->id,
-            'attribute_value_id' =>$value['color']
-        ]);
         $product['quantity'] += $value['quantity'];
        }
        $product->save();
@@ -115,7 +113,7 @@ class ProductService implements ProductServiceInterface
             'attribute'=>'required',
             'quantity'=>'required'
         ],[
-            'attribute'=>'Vui lòng chọn size muốn mua',
+            'attribute'=>'Vui lòng chọn thuộc tính muốn mua',
             'quantity'=>"Hãy chọn số lượng mà bạn muốn mua"
         ]);
         return $validate;

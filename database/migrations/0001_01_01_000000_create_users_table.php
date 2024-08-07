@@ -23,11 +23,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->bigInteger('user_catalogues_id')->nullable();
+            $table->unsignedBigInteger('user_catalogues_id');
             $table->rememberToken();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
 
+            $table->foreign('user_catalogues_id')->references('id')->on('user_catalogues')->cascadeOnDelete();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

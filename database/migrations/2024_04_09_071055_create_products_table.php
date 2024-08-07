@@ -18,8 +18,10 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->integer('quantity')->nullable();
             $table->json('images')->nullable();
-            $table->bigInteger('products_catalogue_id')->nullable();
+            $table->unsignedBigInteger('products_catalogue_id');
             $table->timestamps();
+
+            $table->foreign('products_catalogue_id')->references('id')->on('product_catalogues')->onDelete('cascade');
         });
     }
 

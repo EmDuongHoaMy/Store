@@ -2,16 +2,19 @@ function addCart(){
     var qtt = $('#quantity').val();
     var attribute = $('#attribute').val();
     var id = $('#product_id').val();
-    var cartItemId = $(this).data("cart-item-id");
+    // var cartItemId = $(this).data("cart-item-id");
     var _token = $('meta[name="csrf-token"]').attr('content');
 
-    let option = {
+    var option = {
         // _token: '{{ csrf_token() }}',
         'id' : id,
         'attribute' : attribute,
         'quantity':qtt,
-        'cart_item_id': cartItemId
+        // 'cart_item_id': cartItemId
     }
+    
+    document.getElementById('attributeError').innerText = '';
+
     $.ajax({
         url: "/store/add_to_cart",
         type: 'GET',
@@ -24,7 +27,7 @@ function addCart(){
             console.table(res);
         },
         error: function(xhr, status, error) {
-            console.error(error);
+            document.getElementById('attributeError').innerText = 'Vui lòng chọn thuộc tính muốn mua';
         }
     });
 }

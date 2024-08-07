@@ -2,7 +2,7 @@
 @section('script')
     <link rel="stylesheet" href="{{ asset('css/store/pay') }}">
     <script src="{{ asset('js/goback.js') }}"></script>
-    <script src="{{ asset('js/login.js') }}"></script>
+    {{-- <script src="{{ asset('js/login.js') }}"></script> --}}
 @endsection
 @section('store.main')
 @if (session('cart'))
@@ -20,7 +20,7 @@
                              <th></th>
                              <th style="width:800px">Product</th>
                              <th style="width:120px">Price</th>
-                             <th style="width:150px">Attr(Size-Color)</th>
+                             <th style="width:150px">Attr</th>
                              <th>Quantity</th>
                              <th style="width:150px">Total</th>
                              <th></th>
@@ -99,6 +99,13 @@
                              <input type="text" value="{{ $user->phone_number }}" name="phone_khachhang" id="phone_khachhang" style="width: 100%">
                          </div>
                          <div class="form-control">
+                            <label for="payment_method">Phương thức thanh toán : </label>
+                            <select name="payment_method" id="payment_method" class="form-select">
+                                <option value="">Chọn phương thức thanh toán</option>
+                                <option value="Thanh toán trực tiếp">Thanh toán trực tiếp</option>
+                            </select>
+                        </div>
+                         <div class="form-control">
                              <label for="ghi_chu">Ghi chú : </label>
                              <input type="text" value="" name="ghi_chu" id="ghi_chu" style="width: 100%">
                          </div>
@@ -124,7 +131,7 @@
                              {{-- <input type="text" name="gia_donhang" value="{{ $thanh_tien }}" style="width:20%" readonly hidden> --}}
                              <span class="text-center" style="margin-left:37%;font-size:40px">
                                  <button type="submit" class="btn btn-danger">Xác Nhận Mua Hàng</button>
-                                 <button type="button" onclick="goback()" class="btn btn-danger">Trở lại</button>
+                                 {{-- <button type="button" onclick="goback()" class="btn btn-danger">Trở lại</button> --}}
                              </span>
                          </div>
                  </div>
